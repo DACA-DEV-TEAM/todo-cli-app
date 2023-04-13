@@ -1,0 +1,32 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "extends": [ "eslint-config-codely/typescript" ],
+    "env": {
+      "node": true
+    },
+    "parserOptions": {
+      "project": ["./tsconfig.json"]
+    },
+    "rules": {
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "no-console": "warn",
+        "@typescript-eslint/restrict-template-expressions": "off",
+        "@typescript-eslint/no-unsafe-return": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off",
+        "@typescript-eslint/no-floating-promises": "off"
+      },
+      "overrides": [
+        {
+          "files": ["*.js"],
+          "rules": {
+            "@typescript-eslint/no-unsafe-assignment": "off",
+            "@typescript-eslint/no-unsafe-call": "off",
+            "@typescript-eslint/no-unsafe-member-access": "off",
+            "@typescript-eslint/no-var-requires": "off",
+            "@typescript-eslint/no-floating-promises": "off"
+          }
+        }
+      ]
+  }
