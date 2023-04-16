@@ -7,9 +7,9 @@
     "test": "set NODE_ENV=test && jest",
     "lint": "eslint --ext .ts ./src",
     "lint:fix": "eslint --fix --ext .ts ./src",
-    "dev": "set NODE_ENV=dev && ts-node-dev --inspect --respawn --pretty --transpile-only src/backend/server.start.ts",
+    "dev": "set NODE_ENV=dev && ts-node-dev --inspect --respawn --pretty --transpile-only src/app.ts",
     "build": "rimraf dist && tsc",
-    "start": "node dist/backend/server.start.js"
+    "start": "node dist/app.js"
   },
   "author": "",
   "license": "ISC",
