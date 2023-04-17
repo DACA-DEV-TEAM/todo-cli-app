@@ -1,4 +1,4 @@
-import Task from "../../../../src/user/domain/entities/Task";
+import {Task} from "../../../../src/user/domain/entities/Task";
 import Tasks from "../../../../src/user/domain/entities/Tasks";
 
 describe("Tasks", () => {

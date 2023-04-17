@@ -1,4 +1,4 @@
-import Task from "../../../../src/user/domain/entities/Task"
+import {Task,TaskStatus} from "../../../../src/user/domain/entities/Task"
 
 
 
@@ -9,19 +9,18 @@ describe("Task", () => {
     task = new Task("Comprar leche");
   });
   it("debe tener un id único", () => {
-      expect(task.getId()).toBeDefined();
+      expect(task.id).toBeDefined();
     });
     it("debe tener una descripción", () => {
-        expect(task.getDesc()).toEqual("Comprar leche");
+        expect(task.description).toEqual("Comprar leche");
     });
     
-    it("debe tener completadoEn como null inicialmente", () => {
-        expect(task.getDate()).toBeNull();
+    it("debe tener endTime como null inicialmente", () => {
+        expect(task.endTime).toBeNull();
     });     
     
-  it("debe poder marcar la tarea como completada", () => {
-    task.setDate();
-    expect(task.getDate()).toBeInstanceOf(Date);
+  it("debe poder marcar la tarea como PENDING incialmente", () => {
+    expect(task.status).toBe(TaskStatus.PENDING);
   }); 
 });
 

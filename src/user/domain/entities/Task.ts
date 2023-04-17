@@ -1,23 +1,20 @@
 import { v4 as uuidv4 } from 'uuid';
 
-class Task{
-    private id:string;
-    private date: null| Date;
-    constructor(private desc: string) {
-        this.id = uuidv4();
-        this.date = null;
+enum TaskStatus {
+    PENDING = "Pending",
+    COMPLETED = "Completed"
+  }
+  class Task {
+    readonly id: string;
+    status: TaskStatus;
+    startTime: Date;
+    endTime: Date | null;
+  
+    constructor( public description: string) {
+      this.id = uuidv4();
+      this.status = TaskStatus.PENDING;
+      this.startTime = new Date();
+      this.endTime = null;
     }
-    getId():string{
-        return this.id;
-    }
-    getDesc():string{
-        return this.desc;
-    }
-    getDate():null | Date {
-        return this.date;
-    }
-    setDate():void{
-        this.date = new Date()
-    }
-}
-export default Task;
+  }
+export {Task,TaskStatus};

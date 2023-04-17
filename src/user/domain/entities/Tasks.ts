@@ -1,4 +1,4 @@
-import Task from './Task'
+import {Task} from './Task'
 
 class Tasks {
   private _taskList: Task[];
