@@ -1,61 +1,81 @@
-import fs from "fs/promises";
-import { readJsonFile, writeJsonFile } from "../../../src/user/util/JsonFileUtil";
+import { readFile, writeFile } from "fs/promises";
+import { Task, TaskStatus } from "../../../src/user/domain/entities/Task";
+import { reviver, readJsonFile, writeJsonFile } from "../../../src/user/util/JsonFileUtil";
 
-/*
 jest.mock("fs/promises");
+
+const mockReadFile = readFile as jest.MockedFunction<typeof readFile>;
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
+describe('reviver', () => {
+  it('should return a Date object when the input is an ISO date string', () => {
+    const dateString = '2022-01-01T00:00:00.000Z';
+    const result = reviver('anyKey', dateString);
+
+    if (result instanceof Date) {
+      expect(result.toISOString()).toBe(dateString);
+    } else {
+      throw new Error('Expected result to be a Date');
+    }
+    expect(result.toISOString()).toBe(dateString);
+  });
+  it('should return the input value when the input is not an ISO date string', () => {
+    const nonDateString = 'Not a date string';
+    const result = reviver('anyKey', nonDateString);
+
+    expect(result).toBe(nonDateString);
+  });
+});
+
+const jsonFilePath = "test.json";
+const task = new Task("This is a test");
+const tasks: Task[] = [
+  task
+];
+
 describe("readJsonFile", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+  it('should return an array of tasks when the file exists', async () => {
+    mockReadFile.mockResolvedValueOnce(JSON.stringify(tasks));
 
-  it("should return an empty array if the file does not exist", async () => {
-    fs.readFile.mockRejectedValueOnce({ code: "ENOENT" });
+    const result = await readJsonFile(jsonFilePath);
 
-    const result = await readJsonFile("nonexistent.json");
-    expect(result).toEqual([]);
-  });
-
-  it("should return a valid array of tasks if the file contains valid JSON", async () => {
-    const tasks = [
-      { id: 1, title: "Task 1" },
-      { id: 2, title: "Task 2" },
-    ];
-    fs.readFile.mockResolvedValueOnce(JSON.stringify(tasks));
-
-    const result = await readJsonFile("valid.json");
     expect(result).toEqual(tasks);
   });
 
-  it("should throw an error if the file contains invalid JSON", async () => {
-    fs.readFile.mockResolvedValueOnce("{invalid-json");
+  it('should throw an error if the file content is not valid JSON', async () => {
+    mockReadFile.mockResolvedValueOnce('Invalid JSON content');
 
-    await expect(readJsonFile("invalid.json")).rejects.toThrow(SyntaxError);
+    await expect(readJsonFile(jsonFilePath)).rejects.toThrow(SyntaxError);
+    expect(mockReadFile).toHaveBeenCalledWith(jsonFilePath, 'utf8');
+  });
+
+  it('should throw an error when the file does not exist', async () => {
+    const error = new Error('File not found');
+    (error as any).code = 'ENOENT';
+    mockReadFile.mockRejectedValueOnce(error);
+
+    await expect(readJsonFile(jsonFilePath)).rejects.toThrow('File not found');
+    expect(mockReadFile).toHaveBeenCalledWith(jsonFilePath, 'utf8');
   });
 });
 
 describe("writeJsonFile", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   it("should write an empty array to the file if provided an empty task list", async () => {
     await writeJsonFile("empty.json", []);
 
-    expect(fs.writeFile).toHaveBeenCalledWith("empty.json", "[]");
+    expect(writeFile).toHaveBeenCalledWith("empty.json", "[]");
   });
 
   it("should write a non-empty array to the file if provided a non-empty task list", async () => {
-    const tasks = [
-      { id: 1, title: "Task 1" },
-      { id: 2, title: "Task 2" },
-    ];
-
+    
     await writeJsonFile("nonempty.json", tasks);
 
-    expect(fs.writeFile).toHaveBeenCalledWith(
+    expect(writeFile).toHaveBeenCalledWith(
       "nonempty.json",
       JSON.stringify(tasks, null, 2)
     );
   });
 });
-*/
