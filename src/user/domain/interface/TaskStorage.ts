@@ -1,4 +1,4 @@
-import { Task } from "../domain/entities/Task";
+import { Task } from "../entities/Task";
 
 interface TaskStorage {
 	createTask(task: Task): Promise<Task>;

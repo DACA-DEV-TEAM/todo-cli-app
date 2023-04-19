@@ -1,6 +1,6 @@
-import TaskStorage from "../../infrastructure/TaskStorage";
 import { readJsonFile, writeJsonFile } from "../../util/JsonFileUtil";
 import { Task } from "../entities/Task";
+import TaskStorage from "../interface/TaskStorage";
 
 class JsonTaskStorage implements TaskStorage {
 	constructor(public path: string) {}
