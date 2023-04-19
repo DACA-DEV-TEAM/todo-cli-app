@@ -1,5 +1,3 @@
-/* eslint-disable unused-imports/no-unused-vars */
-/* eslint-disable @typescript-eslint/require-await */
 import TaskStorage from "../../infrastructure/TaskStorage";
 import { readJsonFile, writeJsonFile } from "../../util/JsonFileUtil";
 import { Task } from "../entities/Task";
