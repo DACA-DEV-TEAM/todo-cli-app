@@ -27,7 +27,15 @@ class JsonTaskStorage implements TaskStorage {
 	}
 
 	async deleteTask(id: string): Promise<boolean> {
-		throw new Error("Method not implemented.");
+		const data = await readJsonFile(this.path);
+		const task = data.findIndex((task) => task.id === id);
+		if (task !== -1) {
+			data.splice(task, 1);
+			await writeJsonFile(this.path, data);
+
+			return true;
+		}
+		throw new Error("Task not found");
 	}
 
 	async listTasks(): Promise<Task[]> {
