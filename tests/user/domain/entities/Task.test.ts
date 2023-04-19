@@ -10,7 +10,7 @@ describe("Task", () => {
 		expect(task.id).toBeDefined();
 	});
 	it("should have a description", () => {
-		expect(task.description).toEqual("Comprar leche");
+		expect(task.description).toEqual("Buy milk");
 	});
 
 	it("debe tener endTime como null initially", () => {
