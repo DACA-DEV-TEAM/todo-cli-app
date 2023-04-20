@@ -12,7 +12,7 @@ const menu = [
 			},
 			{
 				value: "2",
-				name: "2. List Task",
+				name: "2. List Tasks",
 			},
 			{
 				value: "3",
@@ -48,7 +48,7 @@ const inquirerMenu = async (): Promise<string> => {
 	return option;
 };
 
-const pausa = async (): Promise<void> => {
+const pause = async (): Promise<void> => {
 	const questions = [
 		{
 			type: "input",
@@ -81,4 +81,4 @@ const readImput = async (message: string): Promise<object> => {
 	return description;
 };
 
-export { inquirerMenu, pausa, readImput };
+export { inquirerMenu, pause, readImput };

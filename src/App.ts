@@ -1,5 +1,12 @@
 /* eslint-disable no-await-in-loop */
-import { inquirerMenu, pausa } from "./user/infrastructure/inquirer/inquirerMenu";
+import {
+	createTask,
+	deleteTask,
+	listTasks,
+	searchTask,
+	updateTask,
+} from "./user/infrastructure/controller";
+import { inquirerMenu, pause } from "./user/infrastructure/inquirer/inquirerMenu";
 
 const main = async () => {
 	let opt = "";
@@ -9,23 +16,23 @@ const main = async () => {
 		opt = await inquirerMenu();
 		switch (opt) {
 			case "1":
-				//TODO CREAR TAREA
+				await createTask();
 				break;
 			case "2":
-				//TODO LISTAR TAREAS
+				await listTasks();
 				break;
 			case "3":
-				//TODO UPDATE TASK
+				await updateTask();
 				break;
 			case "4":
-				//TODO SEARCH TASK
+				searchTask();
 				break;
 			case "5":
-				//TODO DELETE TASK
+				deleteTask();
 				break;
 		}
 
-		await pausa();
+		await pause();
 	} while (opt !== "0");
 };
 
