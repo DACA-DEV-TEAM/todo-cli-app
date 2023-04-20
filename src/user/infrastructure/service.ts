@@ -31,3 +31,5 @@ class service {
 		return await this._db.deleteTask(id);
 	}
 }
+
+export default service;
