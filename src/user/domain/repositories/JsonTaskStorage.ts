@@ -16,12 +16,14 @@ class JsonTaskStorage implements TaskStorage {
 	async updateTask(id: string, updatedTaskData: Partial<Task>): Promise<boolean> {
 		const data = await readJsonFile(this.path);
 		const taskToUpdate = data.findIndex((task) => task.id === id);
-		if (taskToUpdate !== -1) {
-			data[taskToUpdate] = { ...data[taskToUpdate], ...updatedTaskData };
-
-			return true;
+		if (taskToUpdate === -1) {
+			throw new Error("Not found");
 		}
-		throw new Error("Not found");
+		data[taskToUpdate] = { ...data[taskToUpdate], ...updatedTaskData };
+
+		await writeJsonFile(this.path, data);
+
+		return true;
 	}
 
 	async deleteTask(id: string): Promise<boolean> {

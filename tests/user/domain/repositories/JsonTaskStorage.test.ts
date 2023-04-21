@@ -59,12 +59,41 @@ describe("JsonTaskStorage", () => {
 });
 
 describe("updateTask", () => {
+	const taskList = [task1, task2, task3];
+	const updatedTasklist = [task1, task2, { ...task3, status: TaskStatus.COMPLETED }];
+	const mockwriteJsonFile = writeJsonFile as jest.MockedFunction<typeof writeJsonFile>;
 	const mockReadJsonFile = readJsonFile as jest.MockedFunction<typeof readJsonFile>;
-	mockReadJsonFile.mockResolvedValue([task1]);
+	beforeEach(() => {
+		jest.clearAllMocks();
+		mockReadJsonFile.mockResolvedValue(taskList);
+		mockwriteJsonFile.mockImplementation((filePath: string, data: Task[]) => {
+			expect(filePath).toBe(jsonFilePath); // Comprobar que el archivo es el correcto
+			expect(data).toStrictEqual(updatedTasklist); // Comprobar que los datos escritos son los esperados
+
+			return Promise.resolve();
+		});
+	});
+
+	afterEach(() => {
+		jest.clearAllMocks();
+	});
+
+	it("updateTask to update the task", async () => {
+		//Arrange
+		const id = task3.id;
+		const updatedTaskData = { status: TaskStatus.COMPLETED };
+		//Act
+		await jsonTaskStorage.updateTask(id, updatedTaskData);
+		//Assert
+		expect(mockReadJsonFile).toHaveBeenCalledTimes(1);
+		expect(mockwriteJsonFile).toHaveBeenCalledTimes(1);
+		expect(mockwriteJsonFile).toHaveBeenCalledWith(jsonFilePath, updatedTasklist);
+		expect(mockReadJsonFile).toHaveBeenCalledWith(jsonFilePath);
+	});
 
 	it("updateTask to resolves true", async () => {
 		//Arrange
-		const id = task1.id;
+		const id = task3.id;
 		const updatedTaskData = { status: TaskStatus.COMPLETED };
 		//Act
 		const result = jsonTaskStorage.updateTask(id, updatedTaskData);
