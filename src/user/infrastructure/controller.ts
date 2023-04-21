@@ -20,7 +20,13 @@ const listTasks = async (): Promise<void> => {
 	});
 };
 const updateTask = async (): Promise<void> => {
-	throw new Error("");
+	const id = await showTasks(service.listTasks());
+	const task = await service.searchTask(id);
+	const desc = await readImput("description");
+	const status = await readImput("status");
+	await service.updateTask()
+
+	//throw new Error("");
 };
 const searchTask = async (): Promise<void> => {
 	throw new Error("");
