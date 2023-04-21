@@ -61,7 +61,7 @@ const pause = async (): Promise<void> => {
 	await inquirer.prompt(questions);
 };
 
-const readImput = async (message: string): Promise<object> => {
+const readImput = async (message: string): Promise<string> => {
 	const question = [
 		{
 			type: "input",
@@ -81,4 +81,46 @@ const readImput = async (message: string): Promise<object> => {
 	return description;
 };
 
-export { inquirerMenu, pause, readImput };
+interface Task {
+	id: string;
+	description: string;
+	status: string;
+}
+
+const showTasks = async (tasks: Task[]): Promise<string> => {
+	const opción = [
+		{
+			type: "list",
+			name: "option",
+			message: "Choose task to update",
+			choices: tasks.map((task, i) => {
+				const idx = `${i + 1}.`;
+
+				return {
+					value: task.id,
+					name: `${idx} ${task.description}`,
+				};
+			}),
+		},
+	];
+
+	const { option } = await inquirer.prompt(opción);
+
+	return option;
+};
+
+const confirm = async (message: string): Promise<boolean> => {
+	const question = [
+		{
+			type: "confirm",
+			name: "ok",
+			message,
+		},
+	];
+
+	const { ok } = await inquirer.prompt(question);
+
+	return ok;
+};
+
+export { confirm, inquirerMenu, pause, readImput, showTasks };
