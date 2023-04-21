@@ -1,5 +1,5 @@
 import JsonTaskStorage from "../domain/repositories/JsonTaskStorage";
-import { readImput } from "./inquirer/inquirerMenu";
+import { confirmOperation, readImput, showTasks } from "./inquirer/inquirerMenu";
 import Service from "./service";
 //TODO meter path en una variable de entorno
 const path = "./src/jsonDb/db.json";
@@ -19,12 +19,28 @@ const listTasks = async (): Promise<void> => {
 		console.log(`${idx} ${description} :: ${status}`);
 	});
 };
+interface Partial {
+	id?: string;
+	description?: string;
+	status?: string;
+}
 const updateTask = async (): Promise<void> => {
-	const id = await showTasks(service.listTasks());
-	const task = await service.searchTask(id);
-	const desc = await readImput("description");
+	// Creo el objeto vacio
+	const partial: Partial = {};
+	// Muestro la lista para obtener el id
+	const idx = await showTasks(await service.listTasks());
+	// le agrego la key id
+	partial.id = idx;
+	const confirmDesc = await confirmOperation("Do you want to update description?");
+	if (confirmDesc) {
+		partial.description = await readImput("Add a new description:");
+	} /*
+	const confirmStatus = await confirmOperation("Do you want to update description?");
+
 	const status = await readImput("status");
-	await service.updateTask()
+	*/
+	console.log(partial);
+	await service.updateTask(idx, partial);
 
 	//throw new Error("");
 };
