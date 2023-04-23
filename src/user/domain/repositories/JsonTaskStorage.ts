@@ -1,5 +1,5 @@
 import { readJsonFile, writeJsonFile } from "../../util/JsonFileUtil";
-import { Task } from "../entities/Task";
+import { Task, TaskStatus } from "../entities/Task";
 import TaskStorage from "../interface/TaskStorage";
 
 class JsonTaskStorage implements TaskStorage {
@@ -20,6 +20,9 @@ class JsonTaskStorage implements TaskStorage {
 			throw new Error("Not found");
 		}
 		data[taskToUpdate] = { ...data[taskToUpdate], ...updatedTaskData };
+		if (data[taskToUpdate].status === TaskStatus.COMPLETED) {
+			data[taskToUpdate].endTime = new Date();
+		}
 
 		await writeJsonFile(this.path, data);
 
