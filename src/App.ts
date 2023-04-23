@@ -12,26 +12,32 @@ const main = async () => {
 	let opt = "";
 	do {
 		console.clear();
-
 		opt = await inquirerMenu();
-		switch (opt) {
-			case "1":
-				await createTask();
-				break;
-			case "2":
-				await listTasks();
-				break;
-			case "3":
-				await updateTask();
-				break;
-			case "4":
-				searchTask();
-				break;
-			case "5":
-				deleteTask();
-				break;
+		try {
+			switch (opt) {
+				case "1":
+					await createTask();
+					break;
+				case "2":
+					await listTasks();
+					break;
+				case "3":
+					await updateTask();
+					break;
+				case "4":
+					await searchTask();
+					break;
+				case "5":
+					await deleteTask();
+					break;
+			}
+		} catch (error: unknown) {
+			if (error instanceof Error) {
+				console.log(error.message);
+			} else {
+				console.log("An error occurred");
+			}
 		}
-
 		await pause();
 	} while (opt !== "0");
 };

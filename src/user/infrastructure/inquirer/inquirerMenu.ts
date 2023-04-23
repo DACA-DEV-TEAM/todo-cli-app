@@ -109,7 +109,31 @@ const showTasks = async (tasks: Task[]): Promise<string> => {
 	return option;
 };
 
-const confirm = async (message: string): Promise<boolean> => {
+const showStatusList = async (): Promise<string> => {
+	const opción = [
+		{
+			type: "list",
+			name: "option",
+			message: "Choose task status",
+			choices: [
+				{
+					value: "1",
+					name: "1. Pending",
+				},
+				{
+					value: "2",
+					name: "2. Completed",
+				},
+			],
+		},
+	];
+
+	const { option } = await inquirer.prompt(opción);
+
+	return option;
+};
+
+const confirmOperation = async (message: string): Promise<boolean> => {
 	const question = [
 		{
 			type: "confirm",
@@ -123,4 +147,4 @@ const confirm = async (message: string): Promise<boolean> => {
 	return ok;
 };
 
-export { confirm, inquirerMenu, pause, readImput, showTasks };
+export { confirmOperation, inquirerMenu, pause, readImput, showStatusList, showTasks };
