@@ -117,11 +117,11 @@ const showStatusList = async (): Promise<string> => {
 			message: "Choose task status",
 			choices: [
 				{
-					value: "1",
+					value: "Pending",
 					name: "1. Pending",
 				},
 				{
-					value: "2",
+					value: "Completed",
 					name: "2. Completed",
 				},
 			],
