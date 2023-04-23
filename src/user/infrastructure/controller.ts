@@ -1,5 +1,6 @@
+import { TaskStatus } from "../domain/entities/Task";
 import JsonTaskStorage from "../domain/repositories/JsonTaskStorage";
-import { confirmOperation, readImput, showTasks } from "./inquirer/inquirerMenu";
+import { confirmOperation, readImput, showStatusList, showTasks } from "./inquirer/inquirerMenu";
 import Service from "./service";
 //TODO meter path en una variable de entorno
 const path = "./src/jsonDb/db.json";
@@ -12,12 +13,15 @@ const createTask = async (): Promise<void> => {
 };
 //TODO si se agrega colors, poner a varios colores para los estados
 const listTasks = async (): Promise<void> => {
-	(await service.listTasks()).forEach((task, i) => {
+	const taskList = await service.listTasks();
+	taskList.forEach((task, i) => {
 		const idx = `${i + 1}`;
 		const { description, status } = task;
-
 		console.log(`${idx} ${description} :: ${status}`);
 	});
+	if (taskList.length === 0) {
+		throw new Error("\n There are no task");
+	}
 };
 interface Partial {
 	id?: string;
@@ -27,7 +31,7 @@ interface Partial {
 const updateTask = async (): Promise<void> => {
 	const taskList = await service.listTasks();
 	if (taskList.length === 0) {
-		throw new Error("There is not tasks");
+		throw new Error("\n There are no task");
 	}
 	const partial: Partial = {};
 
@@ -39,23 +43,34 @@ const updateTask = async (): Promise<void> => {
 	}
 	const confirmStatus = await confirmOperation("Do you want to update status?");
 
-	//TODO Falta implementar la selección del status en el inquire
 	if (confirmStatus) {
-		partial.status = await readImput("Add new status");
+		partial.status = await showStatusList();
 	}
-
-	const updateTask = await service.updateTask(idx, partial);
-	if (updateTask) {
-		console.log("Task updated succesfully");
-	}
+	await service.updateTask(idx, partial);
+	!confirmDesc && !confirmStatus
+		? console.log("No changes have been made")
+		: console.log("Task updated succesfully");
 };
 const searchTask = async (): Promise<void> => {
-	throw new Error("");
+	const taskList = await service.listTasks();
+	if (taskList.length === 0) {
+		throw new Error("There is not tasks");
+	}
+	const idx = await showTasks(taskList);
+	const task = await service.searchTask(idx);
+	console.log(`
+	Description: ${task.description},
+	Status: ${task.status},
+	Started at: ${task.startTime.toDateString()},
+	Ended at: ${
+		task.status !== TaskStatus.COMPLETED ? "Task still on going" : task.endTime?.toDateString()
+	}
+	`);
 };
 const deleteTask = async (): Promise<void> => {
 	const taskList = await service.listTasks();
 	if (taskList.length === 0) {
-		throw new Error("There is not tasks");
+		throw new Error("\n There are no tasks");
 	}
 	const idx = await showTasks(taskList);
 	const task = await service.searchTask(idx);
