@@ -1,12 +1,16 @@
-import { TaskStatus } from "../domain/entities/Task";
-import JsonTaskStorage from "../domain/repositories/JsonTaskStorage";
-import { confirmOperation, readImput, showStatusList, showTasks } from "./inquirer/inquirerMenu";
 import Service from "./service";
 //TODO meter path en una variable de entorno
-const path = "./src/jsonDb/db.json";
-const jsonTaskStorage = new JsonTaskStorage(path);
-const service = new Service(jsonTaskStorage);
 
+class Controller {
+	constructor(private readonly service: Service) {}
+
+	async createTask(description: string): Promise<boolean> {
+		await this.service.createTask(description);
+
+		return true;
+	}
+}
+export default Controller; /* 
 const createTask = async (): Promise<void> => {
 	const desc = await readImput("description");
 	await service.createTask(desc);
@@ -80,4 +84,4 @@ const deleteTask = async (): Promise<void> => {
 		console.log("\n Task deleted successfully");
 	}
 };
-export { createTask, deleteTask, listTasks, searchTask, updateTask };
+export { createTask, deleteTask, listTasks, searchTask, updateTask }; */

@@ -1,5 +1,16 @@
-/* eslint-disable no-await-in-loop */
-import {
+import Inquirer from "./cli/inquirer.start";
+import JsonTaskStorage from "./user/domain/repositories/JsonTaskStorage";
+import Controller from "./user/infrastructure/controller";
+import Service from "./user/infrastructure/service";
+
+const path = "./src/jsonDB/db.json";
+const jsonTaskStorage = new JsonTaskStorage(path);
+const service = new Service(jsonTaskStorage);
+const controller = new Controller(service);
+const inquirer = new Inquirer(controller);
+
+inquirer.start();
+/* import {
 	createTask,
 	deleteTask,
 	listTasks,
@@ -42,4 +53,4 @@ const main = async () => {
 	} while (opt !== "0");
 };
 
-main();
+main(); */
