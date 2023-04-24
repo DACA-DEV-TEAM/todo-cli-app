@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 enum TaskStatus {
 	PENDING = "Pending",
 	COMPLETED = "Completed",
+	ON_GOING = "On going",
 }
 class Task {
 	readonly id: string;

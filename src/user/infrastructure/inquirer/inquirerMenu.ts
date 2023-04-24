@@ -121,8 +121,12 @@ const showStatusList = async (): Promise<string> => {
 					name: "1. Pending",
 				},
 				{
+					value: "On going",
+					name: "2. On going",
+				},
+				{
 					value: "Completed",
-					name: "2. Completed",
+					name: "3. Completed",
 				},
 			],
 		},
