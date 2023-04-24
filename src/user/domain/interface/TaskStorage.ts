@@ -6,6 +6,7 @@ interface TaskStorage {
 	deleteTask(id: string): Promise<boolean>;
 	listTasks(): Promise<Task[]>;
 	get(id: string): Promise<Task>;
+	getUserTasks(userID: string): Promise<Task[]>;
 }
 
 export default TaskStorage;

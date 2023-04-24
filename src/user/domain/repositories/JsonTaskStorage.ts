@@ -13,6 +13,13 @@ class JsonTaskStorage implements TaskStorage {
 		return task;
 	}
 
+	async getUserTasks(userID: string): Promise<Task[]> {
+		const data = await readJsonFile<Task>(this.path);
+		const userTasks = data.filter((task) => task.userId === userID);
+
+		return userTasks;
+	}
+
 	async updateTask(id: string, updatedTaskData: Partial<Task>): Promise<boolean> {
 		const data = await readJsonFile<Task>(this.path);
 		const taskToUpdate = data.findIndex((task) => task.id === id);
