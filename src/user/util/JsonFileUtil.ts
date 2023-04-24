@@ -1,7 +1,5 @@
 import { readFile, writeFile } from "fs/promises";
 
-import { Task } from "../domain/entities/Task";
-
 const reviver = (_key: string, value: string): Date | string => {
 	if (
 		typeof value === "string" &&
@@ -13,15 +11,15 @@ const reviver = (_key: string, value: string): Date | string => {
 	return value;
 };
 
-const readJsonFile = async (jsonFilePath: string): Promise<Task[]> => {
+const readJsonFile = async <T>(jsonFilePath: string): Promise<T[]> => {
 	const data = await readFile(jsonFilePath, "utf8");
-	const tasksJson: Task[] = JSON.parse(data, reviver);
+	const dataJson: T[] = JSON.parse(data, reviver);
 
-	return tasksJson;
+	return dataJson;
 };
 
-const writeJsonFile = async (jsonFilePath: string, tasks: Task[]): Promise<void> => {
-	const data = JSON.stringify(tasks, null, 2);
+const writeJsonFile = async <T>(jsonFilePath: string, dataJson: T[]): Promise<void> => {
+	const data = JSON.stringify(dataJson, null, 2);
 	await writeFile(jsonFilePath, data);
 };
 
