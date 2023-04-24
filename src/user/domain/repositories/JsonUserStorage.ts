@@ -50,6 +50,17 @@ class JsonUserStorage implements UserStorage {
 
 		return user;
 	}
+
+	async getUserByUsername(username: string): Promise<User> {
+		const data = await readJsonFile<User>(this.path);
+		const user = data.find((user) => user.userName === username);
+
+		if (user === undefined) {
+			throw new Error("User Not Found");
+		}
+
+		return user;
+	}
 }
 
 export default JsonUserStorage;
