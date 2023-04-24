@@ -6,7 +6,7 @@ class JsonTaskStorage implements TaskStorage {
 	constructor(public path: string) {}
 
 	async createTask(task: Task): Promise<Task> {
-		const data = await readJsonFile(this.path);
+		const data = await readJsonFile<Task>(this.path);
 		data.push(task);
 		await writeJsonFile(this.path, data);
 
@@ -14,7 +14,7 @@ class JsonTaskStorage implements TaskStorage {
 	}
 
 	async updateTask(id: string, updatedTaskData: Partial<Task>): Promise<boolean> {
-		const data = await readJsonFile(this.path);
+		const data = await readJsonFile<Task>(this.path);
 		const taskToUpdate = data.findIndex((task) => task.id === id);
 		if (taskToUpdate === -1) {
 			throw new Error("Not found");
@@ -24,17 +24,17 @@ class JsonTaskStorage implements TaskStorage {
 			data[taskToUpdate].endTime = new Date();
 		}
 
-		await writeJsonFile(this.path, data);
+		await writeJsonFile<Task>(this.path, data);
 
 		return true;
 	}
 
 	async deleteTask(id: string): Promise<boolean> {
-		const data = await readJsonFile(this.path);
+		const data = await readJsonFile<Task>(this.path);
 		const task = data.findIndex((task) => task.id === id);
 		if (task !== -1) {
 			data.splice(task, 1);
-			await writeJsonFile(this.path, data);
+			await writeJsonFile<Task>(this.path, data);
 
 			return true;
 		}
@@ -42,13 +42,13 @@ class JsonTaskStorage implements TaskStorage {
 	}
 
 	async listTasks(): Promise<Task[]> {
-		const data = await readJsonFile(this.path);
+		const data = await readJsonFile<Task>(this.path);
 
 		return data;
 	}
 
 	async get(id: string): Promise<Task> {
-		const data = await readJsonFile(this.path);
+		const data = await readJsonFile<Task>(this.path);
 		const task = data.find((task) => task.id === id);
 
 		if (task === undefined) {
