@@ -28,7 +28,7 @@ const menu = [
 			},
 			{
 				value: "0",
-				name: "0. Exit",
+				name: "0. Log out",
 			},
 		],
 	},
@@ -43,5 +43,32 @@ const inquirerMenu = async (): Promise<string> => {
 
 	return option;
 };
+const userMenu = async (): Promise<string> => {
+	console.log(board);
+	const userSing = [
+		{
+			type: "list",
+			name: "option",
+			message: "Welcome again",
+			choices: [
+				{
+					value: "login",
+					name: "Login",
+				},
+				{
+					value: "signup",
+					name: "Sing up",
+				},
+				{
+					value: "exit",
+					name: "Exit",
+				},
+			],
+		},
+	];
+	const { option } = await inquirer.prompt(userSing);
 
-export { inquirerMenu };
+	return option;
+};
+
+export { inquirerMenu, userMenu };

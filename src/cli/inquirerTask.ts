@@ -1,6 +1,8 @@
 import inquirer from "inquirer";
 
-const showTasks = async (tasks: Task[]): Promise<string> => {
+const showTasks = async (
+	tasks: { id: string; description: string; status: string }[]
+): Promise<string> => {
 	const opción = [
 		{
 			type: "list",
@@ -33,8 +35,12 @@ const showStatusList = async (): Promise<string> => {
 					name: "1. Pending",
 				},
 				{
+					value: "On going",
+					name: "2. On going",
+				},
+				{
 					value: "Completed",
-					name: "2. Completed",
+					name: "3. Completed",
 				},
 			],
 		},
@@ -44,3 +50,4 @@ const showStatusList = async (): Promise<string> => {
 
 	return option;
 };
+export { showStatusList, showTasks };

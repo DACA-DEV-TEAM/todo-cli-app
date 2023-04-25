@@ -44,4 +44,17 @@ const pause = async (): Promise<void> => {
 	console.log("\n");
 	await inquirer.prompt(questions);
 };
-export { confirmOperation, pause, readInput };
+const getPassword = async (): Promise<string> => {
+	const password = [
+		{
+			type: "password",
+			name: "pass",
+			message: "password",
+			mask: true,
+		},
+	];
+	const { pass } = await inquirer.prompt(password);
+
+	return pass;
+};
+export { confirmOperation, getPassword, pause, readInput };
