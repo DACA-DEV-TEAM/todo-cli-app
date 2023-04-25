@@ -57,4 +57,39 @@ const getPassword = async (): Promise<string> => {
 
 	return pass;
 };
-export { confirmOperation, getPassword, pause, readInput };
+
+const getSignUpPassword = async (): Promise<string> => {
+	const password = [
+		{
+			type: "password",
+			name: "pass",
+			message: "password",
+			mask: true,
+			validate(value: string) {
+				if (value.length < 4) {
+					return "The password must be at least 8 characters";
+				}
+
+				return true;
+			},
+		},
+		{
+			type: "password",
+			name: "pass2",
+			message: "re-enter password",
+			mask: true,
+			validate(value: string, answers: { pass: string }) {
+				if (value !== answers.pass) {
+					return "Passwords do not match";
+				}
+
+				return true;
+			},
+		},
+	];
+	const { pass } = await inquirer.prompt(password);
+
+	return pass;
+};
+
+export { confirmOperation, getPassword, getSignUpPassword, pause, readInput };

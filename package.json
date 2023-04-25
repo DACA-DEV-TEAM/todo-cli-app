@@ -9,7 +9,7 @@
     "lint:fix": "eslint --fix --ext .ts ./src",
     "dev": "set NODE_ENV=dev&& ts-node-dev --inspect --respawn --pretty --transpile-only src/App.ts",
     "build": "rimraf dist && tsc",
-    "start": "node dist/src/app.js"
+    "start": "set NODE_ENV=prod&& node dist/src/app.js"
   },
   "author": "",
   "license": "ISC",

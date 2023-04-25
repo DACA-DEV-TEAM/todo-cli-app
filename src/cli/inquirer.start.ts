@@ -4,7 +4,7 @@ import TaskStorage from "../user/domain/interface/TaskStorage";
 import Controller from "../user/infrastructure/controller";
 import { inquirerMenu, userMenu } from "./inquirerMenu";
 import { showStatusList, showTasks } from "./inquirerTask";
-import { confirmOperation, getPassword, pause, readInput } from "./inquireUtils";
+import { confirmOperation, getPassword, getSignUpPassword, pause, readInput } from "./inquireUtils";
 
 class Inquirer {
 	constructor(
@@ -13,9 +13,7 @@ class Inquirer {
 		private readonly mysqlTaskStorage?: TaskStorage,
 		private readonly mongoTaskStorage?: TaskStorage,
 		private isAuthenticated = false
-	) {
-		this.controller = controller;
-	}
+	) {}
 
 	async start(): Promise<void> {
 		do {
@@ -66,24 +64,32 @@ class Inquirer {
 	private async authenticateUser(): Promise<boolean> {
 		let isAuthenticated = false;
 
+		let opt = "";
 		do {
-			const isSignUp = await userMenu();
-			if (isSignUp === "exit") {
-				break;
-			}
-			const userName = await readInput("userName: ");
-			const password = await getPassword();
+			console.clear();
+			opt = await userMenu();
+			switch (opt) {
+				case "login": {
+					const userName = await readInput("userName: ");
+					const password = await getPassword();
+					isAuthenticated = await this.controller.authenticate(userName, password);
+					if (!isAuthenticated) {
+						console.log("Invalid username or password.");
+					}
+					break;
+				}
+				case "signup": {
+					const userNameSignUp = await readInput("userName: ");
+					const passwordSignUp = await getSignUpPassword();
+					await this.controller.createUser(userNameSignUp, passwordSignUp);
+					console.log("User created successfully!");
+					isAuthenticated = await this.controller.authenticate(userNameSignUp, passwordSignUp);
 
-			if (isSignUp === "signup") {
-				await this.controller.createUser(userName, password);
-				console.log("User created successfully!");
+					break;
+				}
 			}
-
-			isAuthenticated = await this.controller.authenticate(userName, password);
-			if (!isAuthenticated) {
-				console.log("Invalid username or password.");
-			}
-		} while (!isAuthenticated);
+			await pause();
+		} while (!isAuthenticated && opt !== "exit");
 
 		return isAuthenticated;
 	}
@@ -120,8 +126,8 @@ class Inquirer {
 				partialTask.status = await showStatusList();
 			}
 			!confirmDesc && !confirmStatus
-				? console.log("No changes have been made")
-				: console.log("Task updated successfully");
+				? console.log("\n No changes have been made")
+				: console.log("\n Task updated successfully");
 
 			await this.controller.updateTask(idx, partialTask);
 		} else {
@@ -150,6 +156,7 @@ class Inquirer {
 		if (taskList.length !== 0) {
 			const idx = await showTasks(taskList);
 			await this.controller.deleteTask(idx);
+			console.log("\n Task deleted successfully");
 		} else {
 			console.log("\n There are no task");
 		}
