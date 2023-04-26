@@ -1,13 +1,13 @@
+import JsonTaskRepository from "./backend/task/infrastructure/JsonTaskRepository";
+import JsonUserRepository from "./backend/user/infrastructure/JsonUserRepository";
 import Inquirer from "./cli/inquirer.start";
-import JsonTaskStorage from "./user/domain/repositories/JsonTaskStorage";
-import JsonUserStorage from "./user/domain/repositories/JsonUserStorage";
 import Controller from "./user/infrastructure/controller";
 import Service from "./user/infrastructure/service";
-
+//TODO implementar bien los ambos servicios y controladores
 const taskPath = "./src/jsonDB/db.json";
 const userPath = "./src/jsonDB/userDb.json";
-const jsonTaskStorage = new JsonTaskStorage(taskPath);
-const jsonUserStorage = new JsonUserStorage(userPath);
+const jsonTaskStorage = new JsonTaskRepository(taskPath);
+const jsonUserStorage = new JsonUserRepository(userPath);
 
 const service = new Service(jsonTaskStorage, jsonUserStorage);
 const controller = new Controller(service);

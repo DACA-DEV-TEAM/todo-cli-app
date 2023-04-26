@@ -1,8 +1,9 @@
-import { readJsonFile, writeJsonFile } from "../../util/JsonFileUtil";
-import { Task, TaskStatus } from "../entities/Task";
-import TaskStorage from "../interface/TaskStorage";
+import { readJsonFile, writeJsonFile } from "../../../shared/infrastructure/JsonFileUtil";
+import { Task } from "../domain/Task";
+import TaskRepository from "../domain/TaskRepository";
+import { TaskStatus } from "../domain/TaskStatus";
 
-class JsonTaskStorage implements TaskStorage {
+class JsonTaskRepository implements TaskRepository {
 	constructor(public path: string) {}
 
 	async createTask(task: Task): Promise<Task> {
@@ -66,4 +67,4 @@ class JsonTaskStorage implements TaskStorage {
 	}
 }
 
-export default JsonTaskStorage;
+export default JsonTaskRepository;

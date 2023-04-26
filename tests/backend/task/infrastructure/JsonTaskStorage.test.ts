@@ -1,6 +1,6 @@
-import { Task, TaskStatus } from "../../../../src/user/domain/entities/Task";
-import JsonTaskStorage from "../../../../src/user/domain/repositories/JsonTaskStorage";
-import { readJsonFile, writeJsonFile } from "../../../../src/user/util/JsonFileUtil";
+import { Task, TaskStatus } from "../../../../src/backend/task/domain/Task";
+import { readJsonFile, writeJsonFile } from "../../../../src/shared/infrastructure/JsonFileUtil";
+import JsonTaskRepository from "../../../../src/backend/task/infrastructure/JsonTaskRepository";
 
 jest.mock("../../../../src/user/util/JsonFileUtil");
 
@@ -8,11 +8,11 @@ const jsonFilePath = "db.json";
 const task1: Task = new Task("Task 1");
 const task2: Task = new Task("Task 2");
 const task3: Task = new Task("Task 3");
-let jsonTaskStorage: JsonTaskStorage;
+let jsonTaskStorage: JsonTaskRepository;
 
 describe("JsonTaskStorage", () => {
 	beforeEach(() => {
-		jsonTaskStorage = new JsonTaskStorage(jsonFilePath);
+		jsonTaskStorage = new JsonTaskRepository(jsonFilePath);
 		jest.resetAllMocks();
 	});
 
@@ -118,7 +118,7 @@ describe("deleteTask", () => {
 	const taskDb = [task1, task2, task3];
 
 	beforeEach(() => {
-		jsonTaskStorage = new JsonTaskStorage(jsonFilePath);
+		jsonTaskStorage = new JsonTaskRepository(jsonFilePath);
 		mockReadJsonFile.mockResolvedValue(taskDb);
 		mockwriteJsonFile.mockImplementation((filePath: string, data: Task[]) => {
 			expect(filePath).toBe(jsonFilePath); // Comprobar que el archivo es el correcto

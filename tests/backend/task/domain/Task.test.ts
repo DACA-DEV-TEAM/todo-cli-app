@@ -1,4 +1,4 @@
-import { Task, TaskStatus } from "../../../../src/user/domain/entities/Task";
+import { Task, TaskStatus } from "../../../../src/backend/task/domain/Task";
 
 describe("Task", () => {
 	let task: Task;

@@ -1,7 +1,11 @@
 import { readFile, writeFile } from "fs/promises";
 
-import { Task } from "../../../src/user/domain/entities/Task";
-import { readJsonFile, reviver, writeJsonFile } from "../../../src/user/util/JsonFileUtil";
+import { Task } from "../../../src/backend/task/domain/Task";
+import {
+	readJsonFile,
+	reviver,
+	writeJsonFile,
+} from "../../../src/shared/infrastructure/JsonFileUtil";
 
 jest.mock("fs/promises");
 

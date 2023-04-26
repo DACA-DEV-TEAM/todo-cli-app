@@ -1,13 +1,13 @@
-import { readJsonFile, writeJsonFile } from "../../util/JsonFileUtil";
-import User from "../entities/User";
-import UserStorage from "../interface/UserStorage";
+import { readJsonFile, writeJsonFile } from "../../../shared/infrastructure/JsonFileUtil";
+import User from "../domain/User";
+import UserRepository from "../domain/UserRepository";
 
-class JsonUserStorage implements UserStorage {
+class JsonUserRepository implements UserRepository {
 	constructor(public path: string) {}
 
 	async update(id: string, updatedUserData: Partial<User>): Promise<boolean> {
 		const data = await readJsonFile<User>(this.path);
-		const userToUpdate = data.findIndex((user) => user._id === id);
+		const userToUpdate = data.findIndex((user) => user.id === id);
 		if (userToUpdate === -1) {
 			throw new Error("Not found");
 		}
@@ -20,7 +20,7 @@ class JsonUserStorage implements UserStorage {
 
 	async delete(id: string): Promise<boolean> {
 		const data = await readJsonFile<User>(this.path);
-		const user = data.findIndex((user) => user._id === id);
+		const user = data.findIndex((user) => user.id === id);
 		if (user !== -1) {
 			data.splice(user, 1);
 			await writeJsonFile<User>(this.path, data);
@@ -33,7 +33,7 @@ class JsonUserStorage implements UserStorage {
 
 	async get(id: string): Promise<User> {
 		const data = await readJsonFile<User>(this.path);
-		const user = data.find((user) => user._id === id);
+		const user = data.find((user) => user.id === id);
 
 		if (user === undefined) {
 			throw new Error("User Not Found");
@@ -63,4 +63,4 @@ class JsonUserStorage implements UserStorage {
 	}
 }
 
-export default JsonUserStorage;
+export default JsonUserRepository;

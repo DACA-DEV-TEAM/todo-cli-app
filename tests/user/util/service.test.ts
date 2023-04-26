@@ -1,8 +1,8 @@
-import { Task } from "../../../src/user/domain/entities/Task";
-import TaskStorage from "../../../src/user/domain/interface/TaskStorage";
+import { Task } from "../../../src/backend/task/domain/Task";
+import TaskRepository from "../../../src/backend/task/domain/TaskRepository";
 import Service from "../../../src/user/infrastructure/service";
 
-class MockStorage implements TaskStorage {
+class MockStorage implements TaskRepository {
 	public _tasks: Task[] = [];
 	async createTask(task: Task): Promise<Task> {
 		this._tasks.push(task);

@@ -1,11 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 
-enum TaskStatus {
-	PENDING = "Pending",
-	COMPLETED = "Completed",
-	ON_GOING = "On going",
-}
-class Task {
+import { TaskStatus } from "./TaskStatus";
+
+export class Task {
 	readonly id: string;
 	readonly userId: string;
 	status: TaskStatus;
@@ -20,4 +17,3 @@ class Task {
 		this.endTime = null;
 	}
 }
-export { Task, TaskStatus };

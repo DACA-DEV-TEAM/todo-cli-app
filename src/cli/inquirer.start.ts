@@ -1,17 +1,18 @@
 /* eslint-disable no-console */
 /* eslint-disable no-await-in-loop */
-import TaskStorage from "../user/domain/interface/TaskStorage";
+import TaskRepository from "../backend/task/domain/TaskRepository";
 import Controller from "../user/infrastructure/controller";
 import { inquirerMenu, userMenu } from "./inquirerMenu";
 import { showStatusList, showTasks } from "./inquirerTask";
 import { confirmOperation, getPassword, getSignUpPassword, pause, readInput } from "./inquireUtils";
-
+//TODO implementar bien los ambos servicios y controladores
+//TODO Añadir userId y enviarlo al TaskController
 class Inquirer {
 	constructor(
 		private readonly controller: Controller,
-		private readonly jsonTaskStorage?: TaskStorage,
-		private readonly mysqlTaskStorage?: TaskStorage,
-		private readonly mongoTaskStorage?: TaskStorage,
+		private readonly jsonTaskStorage?: TaskRepository,
+		private readonly mysqlTaskStorage?: TaskRepository,
+		private readonly mongoTaskStorage?: TaskRepository,
 		private isAuthenticated = false
 	) {}
 
@@ -96,7 +97,7 @@ class Inquirer {
 
 	private async createTask() {
 		const desc = await readInput("description");
-		await this.controller.createTask(desc);
+		await this.controller.createTask(desc, userId);
 	}
 
 	private async listTasks() {

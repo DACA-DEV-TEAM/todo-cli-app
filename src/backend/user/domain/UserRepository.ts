@@ -1,6 +1,6 @@
-import User from "../entities/User";
+import User from "./User";
 
-interface UserStorage {
+interface UserRepository {
 	create(user: User): Promise<User>;
 	update(id: string, updatedUserData: Partial<User>): Promise<boolean>;
 	delete(id: string): Promise<boolean>;
@@ -8,4 +8,4 @@ interface UserStorage {
 	getUserByUsername(username: string): Promise<User>;
 }
 
-export default UserStorage;
+export default UserRepository;
