@@ -12,9 +12,9 @@ export class UserService {
 	) {}
 
 	async createUser(username: string, password: string): Promise<User> {
-		const userId = this.uuidService.UUIDgenerator();
+		const uuid: string = this.uuidService.UUIDgenerator();
 		const hashedPassword: string = await this.bcryptService.encrypt(password); // El número '10' es la cantidad de rondas de salting
-		const newUser = await this.userRepository.create(new User(userId, username, hashedPassword));
+		const newUser = await this.userRepository.create(new User(uuid, username, hashedPassword));
 
 		return newUser;
 	}
@@ -23,13 +23,8 @@ export class UserService {
 	async authenticate(username: string, password: string): Promise<boolean> {
 		try {
 			const user = await this.userRepository.getUserByUsername(username);
-			const isValidPassword = await this.bcryptService.decrypt(password, user.password);
 
-			if (isValidPassword) {
-				this.userId = user._id;
-			}
-
-			return isValidPassword;
+			return await this.bcryptService.decrypt(password, user.password);
 		} catch (error: unknown) {
 			if (process.env.NODE_ENV === "dev") {
 				if (error instanceof Error) {

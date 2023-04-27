@@ -1,11 +1,17 @@
+import { UuidService } from "../../../shared/application/UuidService";
 import { Task } from "../domain/Task";
 import TaskRepository from "../domain/TaskRepository";
 //TODO recibir el userId del
 //TODO poner uuid a task
 export class TaskService {
-	constructor(private readonly taskRepository: TaskRepository) {}
+	constructor(
+		private readonly taskRepository: TaskRepository,
+		private readonly uuidService: UuidService
+	) {}
+
 	async createTask(desc: string, userId: string): Promise<void> {
-		const task = new Task(desc, userId);
+		const uuid: string = this.uuidService.UUIDgenerator();
+		const task = new Task(uuid, desc, userId);
 		await this.taskRepository.createTask(task);
 	}
 
