@@ -20,11 +20,16 @@ export class UserService {
 	}
 	//TODO cambiar la validacion del password (userId)
 
-	async authenticate(username: string, password: string): Promise<boolean> {
+	async authenticate(username: string, password: string): Promise<string> {
 		try {
 			const user = await this.userRepository.getUserByUsername(username);
 
-			return await this.bcryptService.decrypt(password, user.password);
+			const isAuth = await this.bcryptService.decrypt(password, user.password);
+			if (isAuth) {
+				return user.uuid;
+			}
+
+			return "";
 		} catch (error: unknown) {
 			if (process.env.NODE_ENV === "dev") {
 				if (error instanceof Error) {
@@ -34,7 +39,7 @@ export class UserService {
 				}
 			}
 
-			return false;
+			return "";
 		}
 	}
 }

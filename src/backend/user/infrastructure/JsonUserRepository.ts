@@ -7,7 +7,7 @@ class JsonUserRepository implements UserRepository {
 
 	async update(id: string, updatedUserData: Partial<User>): Promise<boolean> {
 		const data = await readJsonFile<User>(this.path);
-		const userToUpdate = data.findIndex((user) => user.id === id);
+		const userToUpdate = data.findIndex((user) => user.uuid === id);
 		if (userToUpdate === -1) {
 			throw new Error("Not found");
 		}
@@ -20,7 +20,7 @@ class JsonUserRepository implements UserRepository {
 
 	async delete(id: string): Promise<boolean> {
 		const data = await readJsonFile<User>(this.path);
-		const user = data.findIndex((user) => user.id === id);
+		const user = data.findIndex((user) => user.uuid === id);
 		if (user !== -1) {
 			data.splice(user, 1);
 			await writeJsonFile<User>(this.path, data);
@@ -33,7 +33,7 @@ class JsonUserRepository implements UserRepository {
 
 	async get(id: string): Promise<User> {
 		const data = await readJsonFile<User>(this.path);
-		const user = data.find((user) => user.id === id);
+		const user = data.find((user) => user.uuid === id);
 
 		if (user === undefined) {
 			throw new Error("User Not Found");

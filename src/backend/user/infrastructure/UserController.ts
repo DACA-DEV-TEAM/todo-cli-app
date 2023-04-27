@@ -9,7 +9,7 @@ export class UserController {
 		return true;
 	}
 
-	async authenticate(userName: string, password: string): Promise<boolean> {
+	async authenticate(userName: string, password: string): Promise<string> {
 		return await this.userService.authenticate(userName, password);
 	}
 }

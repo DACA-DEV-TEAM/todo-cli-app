@@ -9,7 +9,9 @@ export class TaskController {
 		return true;
 	}
 
-	async listTasks(userId: string): Promise<{ id: string; description: string; status: string }[]> {
+	async listUserTasks(
+		userId: string
+	): Promise<{ uuid: string; description: string; status: string }[]> {
 		return await this.taskService.userTasks(userId);
 	}
 
