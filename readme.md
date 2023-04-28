@@ -1,19 +1,19 @@
-# 🦋 TypeScript TDD Template
+# 🦋 TO-DO CLI APP
 
 ⚡ Start your Node.js project with Typescript using Test Driven Development (TDD) practices.
 
 ### 📋 GitHub Actions Workflow:
 
-[![🏠 Build](https://github.com/AraManjon/typescript-tdd-template/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/AraManjon/typescript-tdd-template/actions/workflows/build.yml)
+[![🏠 Build](https://github.com/ITAcademy-DevTeams/todo-api/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ITAcademy-DevTeams/todo-api/actions/workflows/build.yml)
 
-This GitHub Actions workflow automatically builds and tests the application when code changes are pushed to the master branch or a pull request targeting the master branch is opened or synchronized.
+This GitHub Actions workflow automatically builds and tests the application when code changes are pushed to the master branch or a pull request targeting the main branch is opened or synchronized.
 
 ### 📥 Installation
 
 To get started with this template, you first need to clone the repository:
 
 ```bash
-git clone https://github.com/AraManjon/typescript-tdd-template.git
+git clone https://github.com/ITAcademy-DevTeams/todo-api.git
 ```
 
 Then, install the project dependencies:
@@ -26,9 +26,8 @@ npm install
 
 To start the server in development mode, run the following script:
 ```bash
-npm run rev
+npm run dev
 ```
-Then, open http://localhost:8000 to access the server.
 
 
 ### 🚀 Production
@@ -47,7 +46,7 @@ Then, start the server by running:
 npm start
 ```
 
-This will start the server and make it available at http://localhost:8000.
+This will start the server and make it available.
 
 
 ### 🏗️ Scripts
@@ -67,25 +66,14 @@ This project comes with several predefined scripts in the package.json file:
 
 ### 📝 Dependencies
 
-- cors: middleware for handling Cross-Origin Resource Sharing (CORS)
 
 - dotenv: loads environment variables from a .env file
-
-- express: web framework for Node.js
-
-- express-promise-router: promise-based router for Express
-
-- helmet: middleware for adding security headers
 
 - mongodb: driver for MongoDB
 
 - mysql2: MySQL client for Node.js
 
 ### 🛠️ Dev Dependencies
-
-- @types/cors: TypeScript definitions for cors
-
-- @types/express: TypeScript definitions for express
 
 - @types/jest: TypeScript definitions for jest
 
