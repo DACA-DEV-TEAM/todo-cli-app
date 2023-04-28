@@ -98,31 +98,42 @@ This project comes with several predefined scripts in the package.json file:
 In this folder structure, the code is organized according to the principles of Hexagonal Architecture. 
 
 ```
-src/
-├── backend
-│   ├── middlewares
-│   ├── App.ts
-│   ├── server.start.ts
-│   └── Server.ts
-├── shared
-│   ├── utils
-│   ├── domain
-│   └── infrastructure
-│       ├── config
-│       └── persistence
-└── user
+ src
+  ├── App.ts
+  ├── backend
+  │  ├── task
+  │  │  ├── application
+  │  │  │  └── TaskService.ts
+  │  │  ├── domain
+  │  │  │  ├── Task.ts
+  │  │  │  ├── TaskRepository.ts
+  │  │  │  └── TaskStatus.ts
+  │  │  └── infrastructure
+  │  │    ├── JsonTaskRepository.ts
+  │  │    ├── TaskController.ts
+  │  │    └── taskDb.json
+  │  └── user
+  │    ├── application
+  │    │  ├── BcryptService.ts
+  │    │  └── UserService.ts
+  │    ├── domain
+  │    │  ├── User.ts
+  │    │  └── UserRepository.ts
+  │    └── infrastructure
+  │      ├── JsonUserRepository.ts
+  │      ├── UserController.ts
+  │      └── userDb.json
+  ├── cli
+  │  ├── inquirer.start.ts
+  │  ├── inquirerMenu.ts
+  │  ├── inquirerTask.ts
+  │  └── inquireUtils.ts
+  └── shared
     ├── application
-    │   ├── services
-    │   └── use-cases
+    │  └── UuidService.ts
     ├── domain
-    │   ├── entities
-    │   └── repositories
     └── infrastructure
-        ├── controllers
-        ├── repositories
-        ├── routes
-        ├── services
-        └── UserModule.ts
+      └── JsonFileUtil.ts
 ```
 
 
