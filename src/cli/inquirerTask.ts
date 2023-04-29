@@ -1,7 +1,7 @@
 import inquirer from "inquirer";
 
 const showTasks = async (
-	tasks: { id: string; description: string; status: string }[]
+	tasks: { uuid: string; description: string; status: string }[]
 ): Promise<string> => {
 	const opción = [
 		{
@@ -12,7 +12,7 @@ const showTasks = async (
 				const idx = `${i + 1}.`;
 
 				return {
-					value: task.id,
+					value: task.uuid,
 					name: `${idx} ${task.description}`,
 				};
 			}),

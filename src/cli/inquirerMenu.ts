@@ -49,7 +49,7 @@ const userMenu = async (): Promise<string> => {
 		{
 			type: "list",
 			name: "option",
-			message: "Welcome again",
+			message: "Welcome to TODO APP CLI",
 			choices: [
 				{
 					value: "login",
