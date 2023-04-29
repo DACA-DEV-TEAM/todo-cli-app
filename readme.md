@@ -98,42 +98,42 @@ This project comes with several predefined scripts in the package.json file:
 In this folder structure, the code is organized according to the principles of Hexagonal Architecture. 
 
 ```
- src
-  ├── App.ts
-  ├── backend
-  │  ├── task
-  │  │  ├── application
-  │  │  │  └── TaskService.ts
-  │  │  ├── domain
-  │  │  │  ├── Task.ts
-  │  │  │  ├── TaskRepository.ts
-  │  │  │  └── TaskStatus.ts
-  │  │  └── infrastructure
-  │  │    ├── JsonTaskRepository.ts
-  │  │    ├── TaskController.ts
-  │  │    └── taskDb.json
-  │  └── user
-  │    ├── application
-  │    │  ├── BcryptService.ts
-  │    │  └── UserService.ts
-  │    ├── domain
-  │    │  ├── User.ts
-  │    │  └── UserRepository.ts
-  │    └── infrastructure
-  │      ├── JsonUserRepository.ts
-  │      ├── UserController.ts
-  │      └── userDb.json
-  ├── cli
-  │  ├── inquirer.start.ts
-  │  ├── inquirerMenu.ts
-  │  ├── inquirerTask.ts
-  │  └── inquireUtils.ts
-  └── shared
-    ├── application
-    │  └── UuidService.ts
-    ├── domain
-    └── infrastructure
-      └── JsonFileUtil.ts
+src
+   ├── App.ts
+   ├── backend
+   │  ├── shared
+   │  │  ├── application
+   │  │  │  └── UuidService.ts
+   │  │  ├── domain
+   │  │  └── infrastructure
+   │  │    └── JsonFileUtil.ts
+   │  ├── task
+   │  │  ├── application
+   │  │  │  └── TaskService.ts
+   │  │  ├── domain
+   │  │  │  ├── Task.ts
+   │  │  │  ├── TaskRepository.ts
+   │  │  │  └── TaskStatus.ts
+   │  │  └── infrastructure
+   │  │    ├── JsonTaskRepository.ts
+   │  │    ├── TaskController.ts
+   │  │    └── taskDb.json
+   │  └── user
+   │    ├── application
+   │    │  ├── BcryptService.ts
+   │    │  └── UserService.ts
+   │    ├── domain
+   │    │  ├── User.ts
+   │    │  └── UserRepository.ts
+   │    └── infrastructure
+   │      ├── JsonUserRepository.ts
+   │      ├── UserController.ts
+   │      └── userDb.json
+   └── cli
+      ├── inquirer.start.ts
+      ├── inquirerMenu.ts
+      ├── inquirerTask.ts
+      └── inquireUtils.ts
 ```
 
 
