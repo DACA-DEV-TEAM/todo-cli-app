@@ -1,4 +1,4 @@
-import { readJsonFile, writeJsonFile } from "../../../shared/infrastructure/JsonFileUtil";
+import { readJsonFile, writeJsonFile } from "../../shared/infrastructure/JsonFileUtil";
 import { Task } from "../domain/Task";
 import TaskRepository from "../domain/TaskRepository";
 import { TaskStatus } from "../domain/TaskStatus";

@@ -1,4 +1,4 @@
-import { UuidService } from "../../../shared/application/UuidService";
+import { UuidService } from "../../shared/application/UuidService";
 import User from "../domain/User";
 import UserRepository from "../domain/UserRepository";
 import { BcryptService } from "./BcryptService";

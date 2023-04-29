@@ -1,5 +1,5 @@
-import { Task } from "../../../src/backend/task/domain/Task";
-import TaskRepository from "../../../src/backend/task/domain/TaskRepository";
+import { Task } from "../../../../src/backend/task/domain/Task";
+import TaskRepository from "../../../../src/backend/task/domain/TaskRepository";
 import Service from "../../../src/user/infrastructure/service";
 
 class MockStorage implements TaskRepository {

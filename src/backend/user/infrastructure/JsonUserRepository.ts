@@ -1,4 +1,4 @@
-import { readJsonFile, writeJsonFile } from "../../../shared/infrastructure/JsonFileUtil";
+import { readJsonFile, writeJsonFile } from "../../shared/infrastructure/JsonFileUtil";
 import User from "../domain/User";
 import UserRepository from "../domain/UserRepository";
 

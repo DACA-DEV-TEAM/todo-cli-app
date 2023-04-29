@@ -1,4 +1,4 @@
-import { UuidService } from "../../../shared/application/UuidService";
+import { UuidService } from "../../shared/application/UuidService";
 import { Task } from "../domain/Task";
 import TaskRepository from "../domain/TaskRepository";
 //TODO recibir el userId del

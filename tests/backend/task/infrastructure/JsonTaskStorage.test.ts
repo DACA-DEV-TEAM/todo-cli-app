@@ -1,5 +1,5 @@
 import { Task, TaskStatus } from "../../../../src/backend/task/domain/Task";
-import { readJsonFile, writeJsonFile } from "../../../../src/shared/infrastructure/JsonFileUtil";
+import { readJsonFile, writeJsonFile } from "../../../../src/backend/shared/infrastructure/JsonFileUtil";
 import JsonTaskRepository from "../../../../src/backend/task/infrastructure/JsonTaskRepository";
 
 jest.mock("../../../../src/user/util/JsonFileUtil");
