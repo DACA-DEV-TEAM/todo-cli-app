@@ -151,9 +151,9 @@ In this folder structure, the code is organized according to the principles of H
 
 Contributions are welcome! To contribute to this project:
 
-Fork the repository.
-Create a new branch for your feature or bugfix.
-Commit your changes to your branch.
+- Fork the repository.
+- Create a new branch for your feature or bugfix.
+- Commit your changes to your branch.
 Submit a pull request targeting the develop branch.
 For bug reports and feature requests, please open an issue on the GitHub repository.
 
