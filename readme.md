@@ -161,8 +161,6 @@ For bug reports and feature requests, please open an issue on the GitHub reposit
 This project is licensed under the MIT License. See the LICENSE file for more information.
 
 ### 🧑‍💻 Developers
-- @METAWISER
-- @xpan1c
-
-
+- [@METAWISER](https://github.com/metawiser)
+- [@xpan1c](https://github.com/xpan1c)
 
