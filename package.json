@@ -11,8 +11,8 @@
     "build": "rimraf dist && tsc",
     "start": "set NODE_ENV=prod&& node dist/src/App.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "@metawiser & @xpan1c",
+  "license": "MIT",
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/inquirer": "^9.0.3",
