@@ -1,13 +1,17 @@
 {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
-    "globals": {
-      "ts-jest": {
-        "tsconfig": "./tsconfig.json",
-        "module": "ES6"
-      }
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest"
+  },
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+  "globals": {
+    "ts-jest": {
+      "tsconfig": "./tsconfig.json",
+      "module": "ES6"
     }
-  }
-  
+  },
+  "testMatch": [
+    "**/tests/**/*.ts?(x)",
+    "**/?(*.)+(spec|test).ts?(x)",
+    "!**/dist/**/*"
+  ]
+}
