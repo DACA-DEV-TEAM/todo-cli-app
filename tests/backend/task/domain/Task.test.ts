@@ -1,23 +1,33 @@
-import { Task, TaskStatus } from "../../../../src/backend/task/domain/Task";
+import { Task } from "../../../../src/backend/task/domain/Task";
+import { TaskStatus } from "../../../../src/backend/task/domain/TaskStatus";
 
 describe("Task", () => {
 	let task: Task;
+	const uuid = "test-uuid";
+	const description = "test description";
+	const userId = "test-userId";
 
 	beforeEach(() => {
-		task = new Task("Buy milk");
-	});
-	it("should have a unique Id", () => {
-		expect(task.id).toBeDefined();
-	});
-	it("should have a description", () => {
-		expect(task.description).toEqual("Buy milk");
+		task = new Task(uuid, description, userId);
 	});
 
-	it("debe tener endTime como null initially", () => {
+	it("should have a uuid, description, userId, status, startTime and null endTime", () => {
+		expect(task.uuid).toEqual(uuid);
+		expect(task.description).toEqual(description);
+		expect(task.userId).toEqual(userId);
+		expect(task.status).toEqual(TaskStatus.PENDING);
+		expect(task.startTime).toBeInstanceOf(Date);
 		expect(task.endTime).toBeNull();
 	});
 
-	it("should be able to set the task status as PENDING initially", () => {
-		expect(task.status).toBe(TaskStatus.PENDING);
+	it("should be able to update description and status", () => {
+		const newDescription = "new description";
+		const newStatus = TaskStatus.COMPLETED;
+
+		task.description = newDescription;
+		task.status = newStatus;
+
+		expect(task.description).toEqual(newDescription);
+		expect(task.status).toEqual(newStatus);
 	});
 });
