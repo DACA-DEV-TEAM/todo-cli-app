@@ -1,22 +1,35 @@
-# 🦋 TypeScript TDD Template
+# 📖 TO-DO CLI APP
 
-⚡ Start your Node.js project with Typescript using Test Driven Development (TDD) practices.
+⚡ A Command Line Interface (CLI) TO-DO application built with TypeScript, following Test Driven Development (TDD) practices and hexagonal architecture.
+
+### 📚 Description
+
+This TO-DO CLI application allows users to manage tasks effectively. Users can create tasks, view tasks by status (pending, in progress, completed), update tasks, and delete tasks. The application is designed with hexagonal architecture and uses Typescript for development.
+
+### 🕹 [Demo on Replit](https://replit.com/@DannyX2/todo-api)
+
+Try out the TO-DO CLI app in a live demo on Replit, an online platform to test and run code.
 
 ### 📋 GitHub Actions Workflow:
 
-[![🏠 Build](https://github.com/AraManjon/typescript-tdd-template/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/AraManjon/typescript-tdd-template/actions/workflows/build.yml)
+[![🏠 Build](https://github.com/ITAcademy-DevTeams/todo-api/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ITAcademy-DevTeams/todo-api/actions/workflows/build.yml)
 
-This GitHub Actions workflow automatically builds and tests the application when code changes are pushed to the master branch or a pull request targeting the master branch is opened or synchronized.
+This GitHub Actions workflow automatically builds and tests the application when code changes are pushed to the master branch or a pull request targeting the main branch is opened or synchronized.
+
+### 📋 Prerequisites
+
+- Node.js (version >= 14)
+- npm (version >= 6)
 
 ### 📥 Installation
 
-To get started with this template, you first need to clone the repository:
+To get started, you first need to clone the repository:
 
 ```bash
-git clone https://github.com/AraManjon/typescript-tdd-template.git
+git clone https://github.com/ITAcademy-DevTeams/todo-api.git
 ```
 
-Then, install the project dependencies:
+Next, install the project dependencies:
 
 ```bash
 npm install
@@ -24,16 +37,15 @@ npm install
 
 ### 🏁 How To Start
 
-To start the server in development mode, run the following script:
+To start the app in development mode, run the following script:
 ```bash
-npm run rev
+npm run dev
 ```
-Then, open http://localhost:8000 to access the server.
 
 
 ### 🚀 Production
 
-To run the server in production mode, first build the TypeScript code into JavaScript by running:
+To run the app in production mode, first build the TypeScript code into JavaScript by running:
 
 ```bash
 npm run build
@@ -41,13 +53,13 @@ npm run build
 
 This will generate the dist directory with the compiled JavaScript files.
 
-Then, start the server by running:
+Then, start the app by running:
 
 ```bash
 npm start
 ```
 
-This will start the server and make it available at http://localhost:8000.
+This will start the app and make it available.
 
 
 ### 🏗️ Scripts
@@ -59,33 +71,22 @@ This project comes with several predefined scripts in the package.json file:
 
 ```lint:fix```: Runs ESLint to fix code style issues.
 
-```dev```: Starts the development server with ts-node-dev and allows debugging
+```dev```: Starts the development app with ts-node-dev and allows debugging
 
 ```build```: Removes the ./dist folder and compiles the TypeScript code into JavaScript in the ./dist folder.
 
-```start```: Starts the server in production using the compiled files in the dist/ folder.
+```start```: Starts the app in production using the compiled files in the dist/ folder.
 
 ### 📝 Dependencies
 
-- cors: middleware for handling Cross-Origin Resource Sharing (CORS)
 
 - dotenv: loads environment variables from a .env file
-
-- express: web framework for Node.js
-
-- express-promise-router: promise-based router for Express
-
-- helmet: middleware for adding security headers
 
 - mongodb: driver for MongoDB
 
 - mysql2: MySQL client for Node.js
 
 ### 🛠️ Dev Dependencies
-
-- @types/cors: TypeScript definitions for cors
-
-- @types/express: TypeScript definitions for express
 
 - @types/jest: TypeScript definitions for jest
 
@@ -94,6 +95,8 @@ This project comes with several predefined scripts in the package.json file:
 - eslint: linter for TypeScript
 
 - eslint-config-codely: ESLint configuration used by CodelyTV
+
+- eslint-plugin-hexagonal-architecture: ESLint plugin used to apply hexagonal architecture.
 
 - mysql: MySQL driver for Node.js
 
@@ -110,32 +113,56 @@ This project comes with several predefined scripts in the package.json file:
 In this folder structure, the code is organized according to the principles of Hexagonal Architecture. 
 
 ```
-src/
-├── backend
-│   ├── middlewares
-│   ├── App.ts
-│   ├── server.start.ts
-│   └── Server.ts
-├── shared
-│   ├── utils
-│   ├── domain
-│   └── infrastructure
-│       ├── config
-│       └── persistence
-└── user
-    ├── application
-    │   ├── services
-    │   └── use-cases
-    ├── domain
-    │   ├── entities
-    │   └── repositories
-    └── infrastructure
-        ├── controllers
-        ├── repositories
-        ├── routes
-        ├── services
-        └── UserModule.ts
+   src/
+   ├── App.ts
+   ├── backend
+   │  ├── shared
+   │  │  ├── application
+   │  │  │  └── UuidService.ts
+   │  │  ├── domain
+   │  │  └── infrastructure
+   │  │    └── JsonFileUtil.ts
+   │  ├── task
+   │  │  ├── application
+   │  │  │  └── TaskService.ts
+   │  │  ├── domain
+   │  │  │  ├── Task.ts
+   │  │  │  ├── TaskRepository.ts
+   │  │  │  └── TaskStatus.ts
+   │  │  └── infrastructure
+   │  │    ├── JsonTaskRepository.ts
+   │  │    ├── TaskController.ts
+   │  │    └── taskDb.json
+   │  └── user
+   │    ├── application
+   │    │  ├── BcryptService.ts
+   │    │  └── UserService.ts
+   │    ├── domain
+   │    │  ├── User.ts
+   │    │  └── UserRepository.ts
+   │    └── infrastructure
+   │      ├── JsonUserRepository.ts
+   │      ├── UserController.ts
+   │      └── userDb.json
+   └── cli
+      ├── inquirer.start.ts
+      ├── inquirerMenu.ts
+      ├── inquirerTask.ts
+      └── inquireUtils.ts
 ```
+### 🤝 Contributing
 
+Contributions are welcome! To contribute to this project:
 
+- Fork the repository.
+- Create a new branch for your feature or bugfix.
+- Commit your changes to your branch.
+Submit a pull request targeting the develop branch.
+For bug reports and feature requests, please open an issue on the GitHub repository.
 
+### 📃 License
+This project is licensed under the MIT License. See the LICENSE file for more information.
+
+### 🧑‍💻 Developers
+- [@METAWISER](https://github.com/metawiser)
+- [@xpan1c](https://github.com/xpan1c)
