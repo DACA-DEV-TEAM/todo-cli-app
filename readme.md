@@ -6,6 +6,9 @@
 
 This TO-DO CLI application allows users to manage tasks effectively. Users can create tasks, view tasks by status (pending, in progress, completed), update tasks, and delete tasks. The application is designed with hexagonal architecture and uses Typescript for development.
 
+### 🕹 [Demo on Replit](https://replit.com/@DannyX2/todo-api)
+
+Try out the TO-DO CLI app in a live demo on Replit, an online platform to test and run code.
 
 ### 📋 GitHub Actions Workflow:
 
@@ -163,5 +166,3 @@ This project is licensed under the MIT License. See the LICENSE file for more in
 ### 🧑‍💻 Developers
 - [@METAWISER](https://github.com/metawiser)
 - [@xpan1c](https://github.com/xpan1c)
-
-### 📴 [Try it on Replit](https://replit.com/@DannyX2/todo-api)

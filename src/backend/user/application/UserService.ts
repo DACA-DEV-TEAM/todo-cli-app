@@ -3,7 +3,6 @@ import User from "../domain/User";
 import UserRepository from "../domain/UserRepository";
 import { BcryptService } from "./BcryptService";
 
-//TODO implmentar la logica de usuario
 export class UserService {
 	constructor(
 		private readonly userRepository: UserRepository,
@@ -18,7 +17,6 @@ export class UserService {
 
 		return newUser;
 	}
-	//TODO cambiar la validacion del password (userId)
 
 	async authenticate(username: string, password: string): Promise<string> {
 		try {

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import inquirer from "inquirer";
 
 const confirmOperation = async (message: string): Promise<boolean> => {

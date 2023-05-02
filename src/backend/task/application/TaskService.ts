@@ -1,8 +1,7 @@
 import { UuidService } from "../../shared/application/UuidService";
 import { Task } from "../domain/Task";
 import TaskRepository from "../domain/TaskRepository";
-//TODO recibir el userId del
-//TODO poner uuid a task
+
 export class TaskService {
 	constructor(
 		private readonly taskRepository: TaskRepository,
@@ -19,14 +18,12 @@ export class TaskService {
 		return await this.taskRepository.getUserTasks(userId);
 	}
 
-	//TODO añadir UserId
 	async updateTask(id: string, partial: object): Promise<boolean> {
 		const partialTask: Partial<Task> = partial;
 
 		return await this.taskRepository.updateTask(id, partialTask);
 	}
 
-	//TODO añadir UserId
 	async searchTask(
 		id: string
 	): Promise<{ description: string; status: string; startTime: string; endTime: string | null }> {
@@ -41,7 +38,6 @@ export class TaskService {
 		return parsedObj;
 	}
 
-	//TODO añadir UserId
 	async deleteTask(id: string): Promise<boolean> {
 		return await this.taskRepository.deleteTask(id);
 	}

@@ -1,3 +1,4 @@
+import { UuidService } from "./backend/shared/application/UuidService";
 import { TaskService } from "./backend/task/application/TaskService";
 import JsonTaskRepository from "./backend/task/infrastructure/JsonTaskRepository";
 import { TaskController } from "./backend/task/infrastructure/TaskController";
@@ -6,8 +7,7 @@ import { UserService } from "./backend/user/application/UserService";
 import JsonUserRepository from "./backend/user/infrastructure/JsonUserRepository";
 import { UserController } from "./backend/user/infrastructure/UserController";
 import Inquirer from "./cli/inquirer.start";
-import { UuidService } from "./backend/shared/application/UuidService";
-//TODO implementar bien los ambos servicios y controladores
+
 const taskPath = "./src/backend/task/infrastructure/taskDb.json";
 const userPath = "./src/backend/user/infrastructure/userDb.json";
 const jsonTaskStorage = new JsonTaskRepository(taskPath);

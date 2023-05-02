@@ -7,8 +7,7 @@ import { UserController } from "../backend/user/infrastructure/UserController";
 import { inquirerMenu, userMenu } from "./inquirerMenu";
 import { showStatusList, showTasks } from "./inquirerTask";
 import { confirmOperation, getPassword, getSignUpPassword, pause, readInput } from "./inquireUtils";
-//TODO implementar bien los ambos servicios y controladores
-//TODO Añadir userId y enviarlo al TaskController
+
 class Inquirer {
 	private userId = "";
 	constructor(

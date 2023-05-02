@@ -1,8 +1,8 @@
 import { TaskService } from "../application/TaskService";
-//TODO recibir el userId del inquirer
+
 export class TaskController {
 	constructor(private readonly taskService: TaskService) {}
-	//TODO faltan las verificaciones en las BBDD de la creacion de task
+
 	async createTask(description: string, userId: string): Promise<boolean> {
 		await this.taskService.createTask(description, userId);
 
