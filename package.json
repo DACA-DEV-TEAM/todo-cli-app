@@ -1,7 +1,7 @@
 {
-  "name": "typescript-tdd-template",
-  "version": "1.0.0",
-  "description": "**1.- instalar typescript en el folder proyecto**",
+  "name": "todo-cli-app",
+  "version": "0.0.1",
+  "description": "A Command Line Interface (CLI) TO-DO application built with TypeScript",
   "main": "./src/user/App.ts",
   "scripts": {
     "test": "set NODE_ENV=test && jest",
