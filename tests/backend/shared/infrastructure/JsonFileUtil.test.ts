@@ -33,10 +33,18 @@ describe("reviver", () => {
 
 		expect(result).toBe(nonDateString);
 	});
+	it("reviver function should convert date strings to Date objects", () => {
+		const dateString = "2022-01-01T00:00:00.000Z";
+		const jsonObject = { date: dateString };
+		const jsonString = JSON.stringify(jsonObject);
+		const parsedObject = JSON.parse(jsonString, reviver);
+		expect(parsedObject.date instanceof Date).toBe(true);
+		expect(parsedObject.date.toISOString()).toBe(dateString);
+	});
 });
 
 const jsonFilePath = "test.json";
-const task = new Task("This is a test");
+const task = new Task("123", "This is a test", "234");
 const tasks: Task[] = [task];
 
 describe("readJsonFile", () => {
