@@ -1,10 +1,10 @@
-import { UuidService } from "../../../../src/backend/shared/application/UuidService";
+import { UuidService } from "../../../../../src/backend/shared/application/UuidService";
 import {
 	readJsonFile,
 	writeJsonFile,
-} from "../../../../src/backend/shared/infrastructure/JsonFileUtil";
-import User from "../../../../src/backend/user/domain/User";
-import JsonUserRepository from "../../../../src/backend/user/infrastructure/JsonUserRepository";
+} from "../../../../../src/backend/shared/infrastructure/JsonFileUtil";
+import User from "../../../../../src/backend/user/domain/User";
+import JsonUserRepository from "../../../../../src/backend/user/infrastructure/json/JsonUserRepository";
 
 jest.mock("../../../../src/backend/shared/infrastructure/JsonFileUtil");
 
