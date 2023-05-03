@@ -1,7 +1,7 @@
-import { readJsonFile, writeJsonFile } from "../../shared/infrastructure/JsonFileUtil";
-import { Task } from "../domain/Task";
-import TaskRepository from "../domain/TaskRepository";
-import { TaskStatus } from "../domain/TaskStatus";
+import { readJsonFile, writeJsonFile } from "../../../shared/infrastructure/JsonFileUtil";
+import { Task } from "../../domain/Task";
+import TaskRepository from "../../domain/TaskRepository";
+import { TaskStatus } from "../../domain/TaskStatus";
 
 class JsonTaskRepository implements TaskRepository {
 	constructor(public path: string) {}
