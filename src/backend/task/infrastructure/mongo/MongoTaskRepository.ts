@@ -20,7 +20,7 @@ export class MongoTaskRepository implements TaskRepository {
 	}
 
 	async deleteTask(id: string): Promise<boolean> {
-		const taskToDelete = await taskMongoModel.findById({ uuid: id });
+		const taskToDelete = await taskMongoModel.findOneAndDelete({ uuid: id });
 
 		if (!taskToDelete) {
 			return false;
@@ -30,7 +30,7 @@ export class MongoTaskRepository implements TaskRepository {
 	}
 
 	async get(id: string): Promise<Task> {
-		const task = await taskMongoModel.findById({ uuid: id });
+		const task = await taskMongoModel.findOne({ uuid: id });
 
 		if (!task) {
 			throw new Error(`Task with id ${id} not found`);
