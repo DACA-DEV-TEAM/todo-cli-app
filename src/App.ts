@@ -1,10 +1,10 @@
 import { UuidService } from "./backend/shared/application/UuidService";
 import { TaskService } from "./backend/task/application/TaskService";
-import JsonTaskRepository from "./backend/task/infrastructure/JsonTaskRepository";
+import JsonTaskRepository from "./backend/task/infrastructure/json/JsonTaskRepository";
 import { TaskController } from "./backend/task/infrastructure/TaskController";
 import { BcryptService } from "./backend/user/application/BcryptService";
 import { UserService } from "./backend/user/application/UserService";
-import JsonUserRepository from "./backend/user/infrastructure/JsonUserRepository";
+import JsonUserRepository from "./backend/user/infrastructure/json/JsonUserRepository";
 import { UserController } from "./backend/user/infrastructure/UserController";
 import Inquirer from "./cli/inquirer.start";
 
@@ -20,5 +20,6 @@ const taskService = new TaskService(jsonTaskStorage, uuidService);
 const userController = new UserController(userService);
 const taskController = new TaskController(taskService);
 const inquirer = new Inquirer(userController, taskController, jsonTaskStorage, jsonUserStorage);
-
+//TODO: add connectMongoDB and sequelize
+//connectMongoDB;
 inquirer.start();
