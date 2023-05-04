@@ -10,15 +10,37 @@ export class UserMysqlRepository implements UserRepository {
 	}
 
 	async update(id: string, updatedUserData: Partial<User>): Promise<boolean> {
-		throw new Error("Method not implemented.");
+		const user = await UserMysqlModel.update(
+			{ uuid: id },
+			{
+				where: {
+					...updatedUserData,
+				},
+			}
+		);
+		if (user[0] === 0) {
+			throw new Error("User not found");
+		}
+
+		return true;
 	}
 
 	async delete(id: string): Promise<boolean> {
-		throw new Error("Method not implemented.");
+		const user = await UserMysqlModel.destroy({ where: { uuid: id } });
+		if (user === 0) {
+			throw new Error("User not found");
+		}
+
+		return true;
 	}
 
 	async get(id: string): Promise<User> {
-		throw new Error("Method not implemented.");
+		const user = await UserMysqlModel.findOne({ where: { uuid: id } });
+		if (user === null) {
+			throw new Error("User not found");
+		}
+
+		return user;
 	}
 
 	async getUserByUsername(username: string): Promise<User> {
