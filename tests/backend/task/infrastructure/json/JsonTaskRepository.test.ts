@@ -1,11 +1,11 @@
-import { UuidService } from "../../../../src/backend/shared/application/UuidService";
+import { UuidService } from "../../../../../src/backend/shared/application/UuidService";
 import {
 	readJsonFile,
 	writeJsonFile,
-} from "../../../../src/backend/shared/infrastructure/JsonFileUtil";
-import { Task } from "../../../../src/backend/task/domain/Task";
-import { TaskStatus } from "../../../../src/backend/task/domain/TaskStatus";
-import JsonTaskRepository from "../../../../src/backend/task/infrastructure/JsonTaskRepository";
+} from "../../../../../src/backend/shared/infrastructure/JsonFileUtil";
+import { Task } from "../../../../../src/backend/task/domain/Task";
+import { TaskStatus } from "../../../../../src/backend/task/domain/TaskStatus";
+import JsonTaskRepository from "../../../../../src/backend/task/infrastructure/json/JsonTaskRepository";
 
 jest.mock("../../../../src/backend/shared/infrastructure/JsonFileUtil");
 

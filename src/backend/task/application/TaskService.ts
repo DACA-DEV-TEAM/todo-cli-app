@@ -20,6 +20,9 @@ export class TaskService {
 
 	async updateTask(id: string, partial: object): Promise<boolean> {
 		const partialTask: Partial<Task> = partial;
+		partialTask.status !== "Completed"
+			? (partialTask.endTime = null)
+			: (partialTask.endTime = new Date());
 
 		return await this.taskRepository.updateTask(id, partialTask);
 	}

@@ -1,7 +1,6 @@
-import { readJsonFile, writeJsonFile } from "../../shared/infrastructure/JsonFileUtil";
-import { Task } from "../domain/Task";
-import TaskRepository from "../domain/TaskRepository";
-import { TaskStatus } from "../domain/TaskStatus";
+import { readJsonFile, writeJsonFile } from "../../../shared/infrastructure/JsonFileUtil";
+import { Task } from "../../domain/Task";
+import TaskRepository from "../../domain/TaskRepository";
 
 class JsonTaskRepository implements TaskRepository {
 	constructor(public path: string) {}
@@ -28,9 +27,6 @@ class JsonTaskRepository implements TaskRepository {
 			throw new Error("Not found");
 		}
 		data[taskToUpdate] = { ...data[taskToUpdate], ...updatedTaskData };
-		if (data[taskToUpdate].status === TaskStatus.COMPLETED) {
-			data[taskToUpdate].endTime = new Date();
-		}
 
 		await writeJsonFile<Task>(this.path, data);
 

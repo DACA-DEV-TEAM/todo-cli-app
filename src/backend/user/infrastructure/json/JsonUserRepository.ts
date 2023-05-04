@@ -1,6 +1,6 @@
-import { readJsonFile, writeJsonFile } from "../../shared/infrastructure/JsonFileUtil";
-import User from "../domain/User";
-import UserRepository from "../domain/UserRepository";
+import { readJsonFile, writeJsonFile } from "../../../shared/infrastructure/JsonFileUtil";
+import User from "../../domain/User";
+import UserRepository from "../../domain/UserRepository";
 
 class JsonUserRepository implements UserRepository {
 	constructor(public path: string) {}
