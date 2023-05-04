@@ -31,4 +31,8 @@ export class TaskController {
 	async deleteTask(id: string): Promise<boolean> {
 		return await this.taskService.deleteTask(id);
 	}
+
+	chooseRepository(repository: string): void {
+		this.taskService.chooseRepository(repository);
+	}
 }

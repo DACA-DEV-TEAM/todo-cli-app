@@ -1,6 +1,8 @@
 import { UuidService } from "./backend/shared/application/UuidService";
 import { TaskService } from "./backend/task/application/TaskService";
+import { TaskSwitchRepository } from "./backend/task/application/TaskSwitchRepository";
 import JsonTaskRepository from "./backend/task/infrastructure/json/JsonTaskRepository";
+import { MongoTaskRepository } from "./backend/task/infrastructure/mongo/MongoTaskRepository";
 import { TaskController } from "./backend/task/infrastructure/TaskController";
 import { BcryptService } from "./backend/user/application/BcryptService";
 import { UserService } from "./backend/user/application/UserService";
@@ -14,14 +16,21 @@ const taskPath = "./src/backend/task/infrastructure/json/taskDb.json";
 const userPath = "./src/backend/user/infrastructure/json/userDb.json";
 const jsonTaskStorage = new JsonTaskRepository(taskPath);
 const jsonUserStorage = new JsonUserRepository(userPath);
+
 const mongoUserStorage = new MongoUserRepository();
+const mongoTaskStorage = new MongoTaskRepository();
+
+const taskSwitchRepository = new TaskSwitchRepository(jsonTaskStorage, mongoTaskStorage);
 const userSwitchRepository = new UserSwitchRepository(jsonUserStorage, mongoUserStorage);
+
 const uuidService = new UuidService();
 const bcryptService = new BcryptService();
+
 const userService = new UserService(bcryptService, uuidService, userSwitchRepository);
-const taskService = new TaskService(jsonTaskStorage, uuidService);
+const taskService = new TaskService(uuidService, taskSwitchRepository);
 const userController = new UserController(userService);
 const taskController = new TaskController(taskService);
+
 const inquirer = new Inquirer(userController, taskController);
 //TODO: add connectMongoDB and sequelize
 //connectMongoDB;

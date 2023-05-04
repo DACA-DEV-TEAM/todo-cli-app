@@ -14,7 +14,6 @@ class Inquirer {
 	) {}
 
 	async start(): Promise<void> {
-		await this.selectDb();
 		do {
 			let isAuthenticated = await this.authenticateUser();
 			if (!isAuthenticated) {
@@ -61,6 +60,7 @@ class Inquirer {
 	}
 
 	private async authenticateUser(): Promise<boolean> {
+		await this.selectDb();
 		let isAuthenticated = false;
 
 		let opt = "";
@@ -168,6 +168,7 @@ class Inquirer {
 		console.clear();
 		db = await showDbList();
 		this.userController.chooseRepository(db);
+		this.taskController.chooseRepository(db);
 		await pause();
 	}
 }
