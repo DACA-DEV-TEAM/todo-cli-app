@@ -12,4 +12,8 @@ export class UserController {
 	async authenticate(userName: string, password: string): Promise<string> {
 		return await this.userService.authenticate(userName, password);
 	}
+
+	chooseRepository(repository: string): void {
+		this.userService.chooseRepository(repository);
+	}
 }

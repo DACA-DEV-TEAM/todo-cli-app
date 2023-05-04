@@ -1,10 +1,8 @@
 /* eslint-disable no-console */
 /* eslint-disable no-await-in-loop */
-import TaskRepository from "../backend/task/domain/TaskRepository";
 import { TaskController } from "../backend/task/infrastructure/TaskController";
-import UserRepository from "../backend/user/domain/UserRepository";
 import { UserController } from "../backend/user/infrastructure/UserController";
-import { inquirerMenu, userMenu } from "./inquirerMenu";
+import { inquirerMenu, showDbList, userMenu } from "./inquirerMenu";
 import { showStatusList, showTasks } from "./inquirerTask";
 import { confirmOperation, getPassword, getSignUpPassword, pause, readInput } from "./inquireUtils";
 
@@ -12,14 +10,11 @@ class Inquirer {
 	private userId = "";
 	constructor(
 		private readonly userController: UserController,
-		private readonly taskController: TaskController,
-		private readonly jsonTaskStorage?: TaskRepository,
-		private readonly jsonUserStorage?: UserRepository,
-		private readonly mysqlTaskStorage?: TaskRepository,
-		private readonly mongoTaskStorage?: TaskRepository
+		private readonly taskController: TaskController
 	) {}
 
 	async start(): Promise<void> {
+		await this.selectDb();
 		do {
 			let isAuthenticated = await this.authenticateUser();
 			if (!isAuthenticated) {
@@ -166,6 +161,14 @@ class Inquirer {
 		} else {
 			console.log("\n There are no task");
 		}
+	}
+
+	private async selectDb(): Promise<void> {
+		let db = "";
+		console.clear();
+		db = await showDbList();
+		this.userController.chooseRepository(db);
+		await pause();
 	}
 }
 export default Inquirer;

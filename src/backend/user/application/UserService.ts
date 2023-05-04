@@ -2,13 +2,21 @@ import { UuidService } from "../../shared/application/UuidService";
 import User from "../domain/User";
 import UserRepository from "../domain/UserRepository";
 import { BcryptService } from "./BcryptService";
+import { UserSwitchRepository } from "./UserSwitchRepository";
 
 export class UserService {
+	private userRepository: UserRepository;
 	constructor(
-		private readonly userRepository: UserRepository,
 		private readonly bcryptService: BcryptService,
-		private readonly uuidService: UuidService
-	) {}
+		private readonly uuidService: UuidService,
+		private readonly userSwitchRepository: UserSwitchRepository
+	) {
+		this.userRepository = this.userSwitchRepository.switchRepository();
+	}
+
+	chooseRepository(db: string): void {
+		this.userRepository = this.userSwitchRepository.switchRepository(db);
+	}
 
 	async createUser(username: string, password: string): Promise<User> {
 		const uuid: string = this.uuidService.UUIDgenerator();
