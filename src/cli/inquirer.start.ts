@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-await-in-loop */
+import { logBuffer } from "../backend/shared/infrastructure/config/sequelize";
 import TaskRepository from "../backend/task/domain/TaskRepository";
 import { TaskController } from "../backend/task/infrastructure/TaskController";
 import UserRepository from "../backend/user/domain/UserRepository";
@@ -166,6 +167,13 @@ class Inquirer {
 		} else {
 			console.log("\n There are no task");
 		}
+	}
+
+	private displaySequelizeLogs() {
+		logBuffer.forEach((log) => {
+			console.log(log);
+		});
+		logBuffer.length = 0; // Limpia el buffer después de mostrar los registros
 	}
 }
 export default Inquirer;

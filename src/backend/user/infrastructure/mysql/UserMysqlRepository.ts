@@ -11,15 +11,15 @@ export class UserMysqlRepository implements UserRepository {
 
 	async update(id: string, updatedUserData: Partial<User>): Promise<boolean> {
 		const user = await UserMysqlModel.update(
-			{ uuid: id },
+			{ ...updatedUserData },
 			{
 				where: {
-					...updatedUserData,
+					uuid: id,
 				},
 			}
 		);
 		if (user[0] === 0) {
-			throw new Error("User not found");
+			return false;
 		}
 
 		return true;
@@ -28,7 +28,7 @@ export class UserMysqlRepository implements UserRepository {
 	async delete(id: string): Promise<boolean> {
 		const user = await UserMysqlModel.destroy({ where: { uuid: id } });
 		if (user === 0) {
-			throw new Error("User not found");
+			false;
 		}
 
 		return true;
