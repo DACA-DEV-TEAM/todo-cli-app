@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-await-in-loop */
+import { logBuffer } from "../backend/shared/infrastructure/config/sequelize";
 import { TaskController } from "../backend/task/infrastructure/TaskController";
 import { UserController } from "../backend/user/infrastructure/UserController";
 import { inquirerMenu, showDbList, userMenu } from "./inquirerMenu";
@@ -170,6 +171,13 @@ class Inquirer {
 		this.userController.chooseRepository(db);
 		this.taskController.chooseRepository(db);
 		await pause();
+	}
+
+	private displaySequelizeLogs() {
+		logBuffer.forEach((log) => {
+			console.log(log);
+		});
+		logBuffer.length = 0; // Limpia el buffer después de mostrar los registros
 	}
 }
 export default Inquirer;
