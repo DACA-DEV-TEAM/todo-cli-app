@@ -30,7 +30,7 @@ describe("TaskService", () => {
 		const uuid = "uuid-1";
 		const task = new Task(uuid, desc, userId);
 		jest.spyOn(uuidService, "UUIDgenerator").mockReturnValue(uuid);
-		jest.spyOn(taskSwitchRepository, "createTask").mockReturnValue(task);
+		jest.spyOn(taskSwitchRepository, "createTask").mockResolvedValue(task);
 
 		await taskService.createTask(desc, userId);
 
