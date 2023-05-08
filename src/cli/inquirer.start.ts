@@ -62,6 +62,7 @@ class Inquirer {
 
 	private async authenticateUser(): Promise<boolean> {
 		await this.selectDb();
+		this.displaySequelizeLogs();
 		let isAuthenticated = false;
 
 		let opt = "";

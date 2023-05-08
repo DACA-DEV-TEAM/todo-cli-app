@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import dotenv from "dotenv";
 
 import connectMongoDB from "../../shared/infrastructure/config/connectMongoDB";
