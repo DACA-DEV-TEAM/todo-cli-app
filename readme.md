@@ -24,9 +24,9 @@ This GitHub Actions workflow automatically builds and tests the application when
 ### 💾 Using MongoDB or MySQL as a database
 This TO-DO CLI app can be used with either MongoDB or MySQL as a database. To configure the application to use the desired database, update the .env file in the root of your project with the corresponding environment variables.
 #### 🍃 MongoDB Configuration
-To use MongoDB as your database, set the DATABASE environment variable to mongodb and provide the MongoDB connection URI in the `MONGO_URI` variable.
+To use MongoDB as your database, provide the MongoDB connection URI in the `MONGO_URI` variable and choose it on cli menu.
 #### 🐬 MySQL Configuration
-To use MySQL as your database, set the DATABASE environment variable to mysql and provide the MySQL connection details in the `MYSQL_HOST`, 'MYSQL_USER', and `MYSQL_PASSWORD` variables.
+To use MySQL as your database provide the MySQL connection details in the `MYSQL_HOST`, 'MYSQL_USER', and `MYSQL_PASSWORD` variables and choose it on cli menu.
 
 ### 📥 Installation
 
@@ -123,42 +123,68 @@ This project comes with several predefined scripts in the package.json file:
 In this folder structure, the code is organized according to the principles of Hexagonal Architecture. 
 
 ```
-   src/
-   ├── App.ts
-   ├── backend
-   │  ├── shared
-   │  │  ├── application
-   │  │  │  └── UuidService.ts
-   │  │  ├── domain
-   │  │  └── infrastructure
-   │  │    └── JsonFileUtil.ts
-   │  ├── task
-   │  │  ├── application
-   │  │  │  └── TaskService.ts
-   │  │  ├── domain
-   │  │  │  ├── Task.ts
-   │  │  │  ├── TaskRepository.ts
-   │  │  │  └── TaskStatus.ts
-   │  │  └── infrastructure
-   │  │    ├── JsonTaskRepository.ts
-   │  │    ├── TaskController.ts
-   │  │    └── taskDb.json
-   │  └── user
-   │    ├── application
-   │    │  ├── BcryptService.ts
-   │    │  └── UserService.ts
-   │    ├── domain
-   │    │  ├── User.ts
-   │    │  └── UserRepository.ts
-   │    └── infrastructure
-   │      ├── JsonUserRepository.ts
-   │      ├── UserController.ts
-   │      └── userDb.json
-   └── cli
-      ├── inquirer.start.ts
-      ├── inquirerMenu.ts
-      ├── inquirerTask.ts
-      └── inquireUtils.ts
+src/
+├── App.ts
+├── backend
+│  ├── shared
+│  │  ├── application
+│  │  │  └── UuidService.ts
+│  │  └── infrastructure
+│  │     ├── config
+│  │     │  ├── connectMongoDB.ts
+│  │     │  └── sequelize.ts
+│  │     └── JsonFileUtil.ts
+│  ├── task
+│  │  ├── application
+│  │  │  └── TaskService.ts
+│  │  ├── domain
+│  │  │  ├── ITask.ts
+│  │  │  ├── ITaskSwitchRepository.ts
+│  │  │  ├── Task.ts
+│  │  │  ├── TaskRepository.ts
+│  │  │  └── TaskStatus.ts
+│  │  └── infrastructure
+│  │     ├── json
+│  │     │  ├── JsonTaskRepository.ts
+│  │     │  └── taskDb.json
+│  │     ├── mongo
+│  │     │  ├── ITaskMongo.ts
+│  │     │  ├── MongoTaskRepository.ts
+│  │     │  └── TaskMongoModel.ts
+│  │     ├── mysql
+│  │     │  ├── ITaskMysql.ts
+│  │     │  ├── TaskMysqlModel.ts
+│  │     │  └── TaskMysqlRepository.ts
+│  │     ├── TaskController.ts
+│  │     └── TaskSwitchRepository.ts
+│  └── user
+│     ├── application
+│     │  ├── BcryptService.ts
+│     │  └── UserService.ts
+│     ├── domain
+│     │  ├── IUser.ts
+│     │  ├── IUserSwitchRepository.ts
+│     │  ├── User.ts
+│     │  └── UserRepository.ts
+│     └── infrastructure
+│        ├── json
+│        │  ├── JsonUserRepository.ts
+│        │  └── userDb.json
+│        ├── mongo
+│        │  ├── IUserMongo.ts
+│        │  ├── MongoUserRepository.ts
+│        │  └── UserMongoModel.ts
+│        ├── mysql
+│        │  ├── IUserMysql.ts
+│        │  ├── UserMysqlModel.ts
+│        │  └── UserMysqlRepository.ts
+│        ├── UserController.ts
+│        └── UserSwitchRepository.ts
+└── cli
+   ├── inquirer.start.ts
+   ├── inquirerMenu.ts
+   ├── inquirerTask.ts
+   └── inquireUtils.ts
 ```
 ### 🤝 Contributing
 
@@ -174,5 +200,5 @@ For bug reports and feature requests, please open an issue on the GitHub reposit
 This project is licensed under the MIT License. See the LICENSE file for more information.
 
 ### 🧑‍💻 Developers
-- [@METAWISER](https://github.com/metawiser)
-- [@xpan1c](https://github.com/xpan1c)
+- [@METAWISER](https://github.com/metawiser) - [LinkedIn](https://www.linkedin.com/in/carlos-zamora-n/)
+- [@xpan1c](https://github.com/xpan1c) - [Linkedin](https://www.linkedin.com/in/danny-mv/)

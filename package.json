@@ -1,6 +1,6 @@
 {
   "name": "todo-cli-app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Command Line Interface (CLI) TO-DO application built with TypeScript",
   "main": "./src/user/App.ts",
   "scripts": {
