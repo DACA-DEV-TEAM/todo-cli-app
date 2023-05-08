@@ -19,6 +19,7 @@ class Inquirer {
 			let isAuthenticated = await this.authenticateUser();
 			if (!isAuthenticated) {
 				console.log("Exiting...");
+				this.displaySequelizeLogs();
 
 				return;
 			}
@@ -30,18 +31,23 @@ class Inquirer {
 					switch (opt) {
 						case "1":
 							await this.createTask();
+							this.displaySequelizeLogs();
 							break;
 						case "2":
 							await this.listUserTasks();
+							this.displaySequelizeLogs();
 							break;
 						case "3":
 							await this.updateTask();
+							this.displaySequelizeLogs();
 							break;
 						case "4":
 							await this.searchTask();
+							this.displaySequelizeLogs();
 							break;
 						case "5":
 							await this.deleteTask();
+							this.displaySequelizeLogs();
 							break;
 						case "0":
 							isAuthenticated = false;

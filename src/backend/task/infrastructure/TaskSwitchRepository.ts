@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 import connectMongoDB from "../../shared/infrastructure/config/connectMongoDB";
 import { sequelize } from "../../shared/infrastructure/config/sequelize";
-import { ITaskSwitchRepository } from "../domain/ITaskSwitchReposirtory";
+import { ITaskSwitchRepository } from "../domain/ITaskSwitchRepository";
 import { Task } from "../domain/Task";
 import TaskRepository from "../domain/TaskRepository";
 import JsonTaskRepository from "./json/JsonTaskRepository";
@@ -26,41 +26,45 @@ export class TaskSwitchRepository implements ITaskSwitchRepository {
 		return this.taskRepository;
 	}
 
-	async switchRepository(db: string): Promise<TaskRepository> {
+	async switchRepository(db: string): Promise<void> {
 		switch (db) {
 			case "JSON":
 				this.taskRepository = this.jsonTaskRepository;
 
-				return this.taskRepository;
+				break;
 
 			case "MongoDB":
 				try {
 					await connectMongoDB();
 					this.taskRepository = this.mongoTaskRepository;
 
-					return this.taskRepository;
+					break;
 				} catch (error) {
 					console.log(
 						"Error: there was a problem connecting to MongoDB. You will be redirected to JSON."
 					);
-
-					return this.jsonTaskRepository;
+					this.taskRepository = this.jsonTaskRepository;
+					break;
 				}
 			case "MySQL":
 				try {
 					await sequelize.authenticate();
+					await sequelize.sync();
+					this.taskRepository = this.taskMysqlRepository;
 
-					return this.taskMysqlRepository;
+					break;
 				} catch (error) {
 					console.log(
 						"Error: there was a problem connecting to MySQL. You will be redirected to JSON."
 					);
 
-					return this.jsonTaskRepository;
+					this.taskRepository = this.jsonTaskRepository;
+					break;
 				}
 
 			default:
-				return this.jsonTaskRepository;
+				this.taskRepository = this.jsonTaskRepository;
+				break;
 		}
 	}
 

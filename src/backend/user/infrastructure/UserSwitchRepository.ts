@@ -46,41 +46,45 @@ export class UserSwitchRepository implements IUserSwitchRepository {
 		return this.userRepository;
 	}
 
-	public async switchRepository(db?: string): Promise<UserRepository> {
+	public async switchRepository(db?: string): Promise<void> {
 		switch (db) {
 			case "JSON":
 				this.userRepository = this.jsonUserRepository;
-
-				return this.userRepository;
+				break;
 
 			case "MongoDB":
 				try {
 					this.userRepository = this.mongoUserRepository;
 					await connectMongoDB();
 
-					return this.userRepository;
+					break;
 				} catch (error) {
 					console.log(
 						"Error: there was a problem connecting to MongoDB. You will be redirected to JSON."
 					);
 
-					return this.jsonUserRepository;
+					this.userRepository = this.jsonUserRepository;
+					break;
 				}
 			case "MySQL":
 				try {
 					await sequelize.authenticate();
+					await sequelize.sync();
+					this.userRepository = this.sequelizeUserRepository;
 
-					return this.sequelizeUserRepository;
+					break;
 				} catch (error) {
 					console.log(
 						"Error: there was a problem connecting to MySQL. You will be redirected to JSON."
 					);
 
-					return this.jsonUserRepository;
+					this.userRepository = this.jsonUserRepository;
+					break;
 				}
 
 			default:
-				return this.jsonUserRepository;
+				this.userRepository = this.jsonUserRepository;
+				break;
 		}
 	}
 }
