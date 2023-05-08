@@ -3,19 +3,19 @@ import { UuidService } from "../../../../src/backend/shared/application/UuidServ
 import { BcryptService } from "../../../../src/backend/user/application/BcryptService";
 import { UserService } from "../../../../src/backend/user/application/UserService";
 import User from "../../../../src/backend/user/domain/User";
-import UserRepository from "../../../../src/backend/user/domain/UserRepository";
 import { UserController } from "../../../../src/backend/user/infrastructure/UserController";
+import { UserSwitchRepository } from "../../../../src/backend/user/infrastructure/UserSwitchRepository";
 
 jest.mock("../../../../src/backend/user/application/UserService");
 
-const mockUserRepository = {} as UserRepository;
+const mockUserRepository = {} as UserSwitchRepository;
 const mockBcryptService = {} as BcryptService;
 const mockUuidService = {} as UuidService;
 
 const mockUserService = new UserService(
-	mockUserRepository,
 	mockBcryptService,
-	mockUuidService
+	mockUuidService,
+	mockUserRepository
 ) as jest.Mocked<UserService>;
 
 describe("UserController", () => {
