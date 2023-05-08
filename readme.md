@@ -20,6 +20,13 @@ This GitHub Actions workflow automatically builds and tests the application when
 
 - Node.js (version >= 14)
 - npm (version >= 6)
+- MongoDB or MySQL installed and running, depending on the database you choose to use.
+### 💾 Using MongoDB or MySQL as a database
+This TO-DO CLI app can be used with either MongoDB or MySQL as a database. To configure the application to use the desired database, update the .env file in the root of your project with the corresponding environment variables.
+#### 🍃 MongoDB Configuration
+To use MongoDB as your database, set the DATABASE environment variable to mongodb and provide the MongoDB connection URI in the `MONGO_URI` variable.
+#### 🐬 MySQL Configuration
+To use MySQL as your database, set the DATABASE environment variable to mysql and provide the MySQL connection details in the `MYSQL_HOST`, 'MYSQL_USER', and `MYSQL_PASSWORD` variables.
 
 ### 📥 Installation
 
@@ -80,33 +87,36 @@ This project comes with several predefined scripts in the package.json file:
 ### 📝 Dependencies
 
 
-- dotenv: loads environment variables from a .env file
-
-- mongodb: driver for MongoDB
-
-- mysql2: MySQL client for Node.js
+- bcrypt: Library for hashing and comparing passwords.
+- dotenv: Loads environment variables from a .env file.
+- inquirer: Interactive CLI prompt library.
+- mongodb: Driver for MongoDB.
+- mongoose: Object Data Modeling (ODM) library for MongoDB and Node.js.
+- mysql2: MySQL client for Node.js.
+- reflect-metadata: Polyfill for metadata reflection in TypeScript.
+- sequelize: Promise-based Node.js ORM for SQL databases.
+- sequelize-typescript: Adds TypeScript support to Sequelize ORM.
+- uuid: Generates unique identifiers.
 
 ### 🛠️ Dev Dependencies
 
-- @types/jest: TypeScript definitions for jest
-
-- @types/mysql: TypeScript definitions for mysql
-
-- eslint: linter for TypeScript
-
-- eslint-config-codely: ESLint configuration used by CodelyTV
-
+- @types/bcrypt: TypeScript definitions for bcrypt.
+- @types/inquirer: TypeScript definitions for inquirer.
+- @types/jest: TypeScript definitions for jest.
+- @types/mongoose: TypeScript definitions for mongoose.
+- @types/mysql: TypeScript definitions for mysql.
+- @types/node: TypeScript definitions for Node.js.
+- @types/uuid: TypeScript definitions for uuid.
+- @types/validator: TypeScript definitions for validator.
+- eslint: Linter for TypeScript.
+- eslint-config-codely: ESLint configuration used by CodelyTV.
 - eslint-plugin-hexagonal-architecture: ESLint plugin used to apply hexagonal architecture.
-
-- mysql: MySQL driver for Node.js
-
-- rimraf: cross-platform tool for removing files and directories
-
-- ts-jest: TypeScript preprocessor for Jest
-
-- ts-node-dev: TypeScript execution and development environment for Node.js
-
-- tsc-watch: TypeScript compiler with file watching
+- mysql: MySQL driver for Node.js.
+- rimraf: Cross-platform tool for removing files and directories.
+- ts-jest: TypeScript preprocessor for Jest.
+- ts-node-dev: TypeScript execution and development environment for Node.js.
+- tsc-watch: TypeScript compiler with file watching.
+- typescript: TypeScript language package.
 
 ### 🗂️ Folder structure
 
