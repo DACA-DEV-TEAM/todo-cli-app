@@ -1,10 +1,10 @@
 import { UuidService } from "../../shared/application/UuidService";
 import { Task } from "../domain/Task";
-import TaskRepository from "../domain/TaskRepository";
+import { TaskSwitchRepository } from "../infrastructure/TaskSwitchRepository";
 
 export class TaskService {
 	constructor(
-		private readonly taskRepository: TaskRepository,
+		private readonly taskRepository: TaskSwitchRepository,
 		private readonly uuidService: UuidService
 	) {}
 
@@ -20,6 +20,9 @@ export class TaskService {
 
 	async updateTask(id: string, partial: object): Promise<boolean> {
 		const partialTask: Partial<Task> = partial;
+		partialTask.status !== "Completed"
+			? (partialTask.endTime = null)
+			: (partialTask.endTime = new Date());
 
 		return await this.taskRepository.updateTask(id, partialTask);
 	}
@@ -40,5 +43,9 @@ export class TaskService {
 
 	async deleteTask(id: string): Promise<boolean> {
 		return await this.taskRepository.deleteTask(id);
+	}
+
+	async chooseRepository(db: string): Promise<void> {
+		await this.taskRepository.switchRepository(db);
 	}
 }

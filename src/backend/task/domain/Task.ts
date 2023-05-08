@@ -1,6 +1,7 @@
+import { ITask } from "./ITask";
 import { TaskStatus } from "./TaskStatus";
 
-export class Task {
+export class Task implements ITask {
 	status: TaskStatus;
 	startTime: Date;
 	endTime: Date | null;

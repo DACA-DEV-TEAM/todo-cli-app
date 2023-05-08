@@ -1,14 +1,13 @@
-import { UuidService } from "../../../../src/backend/shared/application/UuidService";
+import { UuidService } from "../../../../../src/backend/shared/application/UuidService";
 import {
 	readJsonFile,
 	writeJsonFile,
-} from "../../../../src/backend/shared/infrastructure/JsonFileUtil";
-import { Task } from "../../../../src/backend/task/domain/Task";
-import { TaskStatus } from "../../../../src/backend/task/domain/TaskStatus";
-import JsonTaskRepository from "../../../../src/backend/task/infrastructure/JsonTaskRepository";
+} from "../../../../../src/backend/shared/infrastructure/JsonFileUtil";
+import { Task } from "../../../../../src/backend/task/domain/Task";
+import { TaskStatus } from "../../../../../src/backend/task/domain/TaskStatus";
+import JsonTaskRepository from "../../../../../src/backend/task/infrastructure/json/JsonTaskRepository";
 
-jest.mock("../../../../src/backend/shared/infrastructure/JsonFileUtil");
-
+jest.mock("../../../../../src/backend/shared/infrastructure/JsonFileUtil");
 const jsonFilePath = "db.json";
 const userId = new UuidService().UUIDgenerator();
 const task1 = new Task(new UuidService().UUIDgenerator(), "Task 1", userId);
@@ -67,7 +66,7 @@ describe("JsonTaskRepository", () => {
 describe("updateTask", () => {
 	const taskList = [task1, task2, task3];
 	const updatedEndTime = new Date();
-	const updatedTask = { ...task3, status: TaskStatus.COMPLETED, endTime: updatedEndTime };
+	const updatedTask = { ...task3, status: TaskStatus.COMPLETED, endTime: null };
 	const updatedTasklist = [task1, task2, updatedTask];
 	const mockwriteJsonFile = writeJsonFile as jest.MockedFunction<
 		typeof writeJsonFile

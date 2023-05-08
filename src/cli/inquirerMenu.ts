@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import colors from "colors";
 import inquirer from "inquirer";
 
 const menu = [
@@ -34,10 +35,10 @@ const menu = [
 		],
 	},
 ];
-const board = `
-┌───── •✧✧• ───────┐
--   TODO APP CLI    - 
-└───── •✧✧• ───────┘`;
+const board = colors.white.bold.italic(`
+		┌───── •✧✧• ───────┐
+		    TODO APP CLI
+		└───── •✧✧• ───────┘`);
 const inquirerMenu = async (): Promise<string> => {
 	console.log(board);
 	const { option } = await inquirer.prompt(menu);
@@ -50,7 +51,7 @@ const userMenu = async (): Promise<string> => {
 		{
 			type: "list",
 			name: "option",
-			message: "Welcome to TODO APP CLI",
+			message: colors.bold.green("Welcome to TODO APP CLI"),
 			choices: [
 				{
 					value: "login",
@@ -72,4 +73,32 @@ const userMenu = async (): Promise<string> => {
 	return option;
 };
 
-export { inquirerMenu, userMenu };
+const showDbList = async (): Promise<string> => {
+	console.log(board);
+	const opción = [
+		{
+			type: "list",
+			name: "option",
+			message: colors.bold.green("Choose the database service of your preference:"),
+			choices: [
+				{
+					value: "JSON",
+					name: "1. JSON",
+				},
+				{
+					value: "MongoDB",
+					name: "2. MongoDB",
+				},
+				{
+					value: "MySQL",
+					name: "3. MySQL",
+				},
+			],
+		},
+	];
+
+	const { option } = await inquirer.prompt(opción);
+
+	return option;
+};
+export { inquirerMenu, showDbList, userMenu };

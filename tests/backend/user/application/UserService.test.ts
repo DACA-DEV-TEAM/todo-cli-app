@@ -2,15 +2,17 @@
 import { UuidService } from "../../../../src/backend/shared/application/UuidService";
 import { BcryptService } from "../../../../src/backend/user/application/BcryptService";
 import { UserService } from "../../../../src/backend/user/application/UserService";
+import { IUserSwitchRepository } from "../../../../src/backend/user/domain/IUserSwitchRepository";
 import User from "../../../../src/backend/user/domain/User";
-import UserRepository from "../../../../src/backend/user/domain/UserRepository";
 
-const mockedUserRepository: jest.Mocked<UserRepository> = {
+const mockedUserSwitchRepository: jest.Mocked<IUserSwitchRepository> = {
 	create: jest.fn(),
 	update: jest.fn(),
 	delete: jest.fn(),
 	get: jest.fn(),
 	getUserByUsername: jest.fn(),
+	getUserRepository: jest.fn(),
+	switchRepository: jest.fn(),
 };
 
 jest.mock("../../../../src/backend/user/application/BcryptService");
@@ -22,10 +24,10 @@ const uuid = "test-uuid";
 const hashedPassword = "hashed-password";
 
 const setup = () => {
-	const userRepository = mockedUserRepository;
+	const userRepository = mockedUserSwitchRepository;
 	const bcryptService = new BcryptService() as jest.Mocked<BcryptService>;
 	const uuidService = new UuidService() as jest.Mocked<UuidService>;
-	const userService = new UserService(userRepository, bcryptService, uuidService);
+	const userService = new UserService(bcryptService, uuidService, userRepository);
 
 	return { userRepository, bcryptService, uuidService, userService };
 };

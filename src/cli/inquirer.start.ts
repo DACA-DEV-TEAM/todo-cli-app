@@ -1,10 +1,9 @@
 /* eslint-disable no-console */
 /* eslint-disable no-await-in-loop */
-import TaskRepository from "../backend/task/domain/TaskRepository";
+import { logBuffer } from "../backend/shared/infrastructure/config/sequelize";
 import { TaskController } from "../backend/task/infrastructure/TaskController";
-import UserRepository from "../backend/user/domain/UserRepository";
 import { UserController } from "../backend/user/infrastructure/UserController";
-import { inquirerMenu, userMenu } from "./inquirerMenu";
+import { inquirerMenu, showDbList, userMenu } from "./inquirerMenu";
 import { showStatusList, showTasks } from "./inquirerTask";
 import { confirmOperation, getPassword, getSignUpPassword, pause, readInput } from "./inquireUtils";
 
@@ -12,11 +11,7 @@ class Inquirer {
 	private userId = "";
 	constructor(
 		private readonly userController: UserController,
-		private readonly taskController: TaskController,
-		private readonly jsonTaskStorage?: TaskRepository,
-		private readonly jsonUserStorage?: UserRepository,
-		private readonly mysqlTaskStorage?: TaskRepository,
-		private readonly mongoTaskStorage?: TaskRepository
+		private readonly taskController: TaskController
 	) {}
 
 	async start(): Promise<void> {
@@ -59,6 +54,7 @@ class Inquirer {
 						console.log("An error occurred");
 					}
 				}
+				this.displaySequelizeLogs();
 				await pause();
 			} while (isAuthenticated);
 			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, no-constant-condition
@@ -66,6 +62,8 @@ class Inquirer {
 	}
 
 	private async authenticateUser(): Promise<boolean> {
+		await this.selectDb();
+
 		let isAuthenticated = false;
 
 		let opt = "";
@@ -94,6 +92,7 @@ class Inquirer {
 					break;
 				}
 			}
+			this.displaySequelizeLogs();
 			await pause();
 		} while (this.userId.length === 0 && opt !== "exit");
 
@@ -166,6 +165,23 @@ class Inquirer {
 		} else {
 			console.log("\n There are no task");
 		}
+	}
+
+	private async selectDb(): Promise<void> {
+		let db = "";
+		console.clear();
+		db = await showDbList();
+		this.userController.chooseRepository(db);
+		this.taskController.chooseRepository(db);
+		this.displaySequelizeLogs();
+		await pause();
+	}
+
+	private displaySequelizeLogs() {
+		logBuffer.forEach((log) => {
+			console.log(log);
+		});
+		logBuffer.length = 0; // Limpia el buffer después de mostrar los registros
 	}
 }
 export default Inquirer;
