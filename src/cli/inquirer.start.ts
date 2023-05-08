@@ -19,7 +19,6 @@ class Inquirer {
 			let isAuthenticated = await this.authenticateUser();
 			if (!isAuthenticated) {
 				console.log("Exiting...");
-				this.displaySequelizeLogs();
 
 				return;
 			}
@@ -31,23 +30,18 @@ class Inquirer {
 					switch (opt) {
 						case "1":
 							await this.createTask();
-							this.displaySequelizeLogs();
 							break;
 						case "2":
 							await this.listUserTasks();
-							this.displaySequelizeLogs();
 							break;
 						case "3":
 							await this.updateTask();
-							this.displaySequelizeLogs();
 							break;
 						case "4":
 							await this.searchTask();
-							this.displaySequelizeLogs();
 							break;
 						case "5":
 							await this.deleteTask();
-							this.displaySequelizeLogs();
 							break;
 						case "0":
 							isAuthenticated = false;
@@ -60,6 +54,7 @@ class Inquirer {
 						console.log("An error occurred");
 					}
 				}
+				this.displaySequelizeLogs();
 				await pause();
 			} while (isAuthenticated);
 			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, no-constant-condition
@@ -68,7 +63,7 @@ class Inquirer {
 
 	private async authenticateUser(): Promise<boolean> {
 		await this.selectDb();
-		this.displaySequelizeLogs();
+
 		let isAuthenticated = false;
 
 		let opt = "";
@@ -97,6 +92,7 @@ class Inquirer {
 					break;
 				}
 			}
+			this.displaySequelizeLogs();
 			await pause();
 		} while (this.userId.length === 0 && opt !== "exit");
 
@@ -177,6 +173,7 @@ class Inquirer {
 		db = await showDbList();
 		this.userController.chooseRepository(db);
 		this.taskController.chooseRepository(db);
+		this.displaySequelizeLogs();
 		await pause();
 	}
 
