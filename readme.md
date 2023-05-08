@@ -123,42 +123,68 @@ This project comes with several predefined scripts in the package.json file:
 In this folder structure, the code is organized according to the principles of Hexagonal Architecture. 
 
 ```
-   src/
-   ├── App.ts
-   ├── backend
-   │  ├── shared
-   │  │  ├── application
-   │  │  │  └── UuidService.ts
-   │  │  ├── domain
-   │  │  └── infrastructure
-   │  │    └── JsonFileUtil.ts
-   │  ├── task
-   │  │  ├── application
-   │  │  │  └── TaskService.ts
-   │  │  ├── domain
-   │  │  │  ├── Task.ts
-   │  │  │  ├── TaskRepository.ts
-   │  │  │  └── TaskStatus.ts
-   │  │  └── infrastructure
-   │  │    ├── JsonTaskRepository.ts
-   │  │    ├── TaskController.ts
-   │  │    └── taskDb.json
-   │  └── user
-   │    ├── application
-   │    │  ├── BcryptService.ts
-   │    │  └── UserService.ts
-   │    ├── domain
-   │    │  ├── User.ts
-   │    │  └── UserRepository.ts
-   │    └── infrastructure
-   │      ├── JsonUserRepository.ts
-   │      ├── UserController.ts
-   │      └── userDb.json
-   └── cli
-      ├── inquirer.start.ts
-      ├── inquirerMenu.ts
-      ├── inquirerTask.ts
-      └── inquireUtils.ts
+src/
+├── App.ts
+├── backend
+│  ├── shared
+│  │  ├── application
+│  │  │  └── UuidService.ts
+│  │  └── infrastructure
+│  │     ├── config
+│  │     │  ├── connectMongoDB.ts
+│  │     │  └── sequelize.ts
+│  │     └── JsonFileUtil.ts
+│  ├── task
+│  │  ├── application
+│  │  │  └── TaskService.ts
+│  │  ├── domain
+│  │  │  ├── ITask.ts
+│  │  │  ├── ITaskSwitchRepository.ts
+│  │  │  ├── Task.ts
+│  │  │  ├── TaskRepository.ts
+│  │  │  └── TaskStatus.ts
+│  │  └── infrastructure
+│  │     ├── json
+│  │     │  ├── JsonTaskRepository.ts
+│  │     │  └── taskDb.json
+│  │     ├── mongo
+│  │     │  ├── ITaskMongo.ts
+│  │     │  ├── MongoTaskRepository.ts
+│  │     │  └── TaskMongoModel.ts
+│  │     ├── mysql
+│  │     │  ├── ITaskMysql.ts
+│  │     │  ├── TaskMysqlModel.ts
+│  │     │  └── TaskMysqlRepository.ts
+│  │     ├── TaskController.ts
+│  │     └── TaskSwitchRepository.ts
+│  └── user
+│     ├── application
+│     │  ├── BcryptService.ts
+│     │  └── UserService.ts
+│     ├── domain
+│     │  ├── IUser.ts
+│     │  ├── IUserSwitchRepository.ts
+│     │  ├── User.ts
+│     │  └── UserRepository.ts
+│     └── infrastructure
+│        ├── json
+│        │  ├── JsonUserRepository.ts
+│        │  └── userDb.json
+│        ├── mongo
+│        │  ├── IUserMongo.ts
+│        │  ├── MongoUserRepository.ts
+│        │  └── UserMongoModel.ts
+│        ├── mysql
+│        │  ├── IUserMysql.ts
+│        │  ├── UserMysqlModel.ts
+│        │  └── UserMysqlRepository.ts
+│        ├── UserController.ts
+│        └── UserSwitchRepository.ts
+└── cli
+   ├── inquirer.start.ts
+   ├── inquirerMenu.ts
+   ├── inquirerTask.ts
+   └── inquireUtils.ts
 ```
 ### 🤝 Contributing
 
@@ -174,5 +200,5 @@ For bug reports and feature requests, please open an issue on the GitHub reposit
 This project is licensed under the MIT License. See the LICENSE file for more information.
 
 ### 🧑‍💻 Developers
-- [@METAWISER](https://github.com/metawiser)
-- [@xpan1c](https://github.com/xpan1c)
+- [@METAWISER](https://github.com/metawiser) - [LinkedIn](https://www.linkedin.com/in/carlos-zamora-n/)
+- [@xpan1c](https://github.com/xpan1c) - [Linkedin](https://www.linkedin.com/in/danny-mv/)
