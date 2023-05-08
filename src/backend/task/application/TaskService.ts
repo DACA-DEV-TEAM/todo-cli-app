@@ -1,20 +1,12 @@
 import { UuidService } from "../../shared/application/UuidService";
 import { Task } from "../domain/Task";
-import TaskRepository from "../domain/TaskRepository";
-import { TaskSwitchRepository } from "./TaskSwitchRepository";
+import { TaskSwitchRepository } from "../infrastructure/TaskSwitchRepository";
 
 export class TaskService {
-	private taskRepository: TaskRepository;
 	constructor(
-		private readonly uuidService: UuidService,
-		private readonly taskSwitchRepository: TaskSwitchRepository
-	) {
-		this.taskRepository = this.taskSwitchRepository.switchRepository();
-	}
-
-	chooseRepository(db: string): void {
-		this.taskRepository = this.taskSwitchRepository.switchRepository(db);
-	}
+		private readonly taskRepository: TaskSwitchRepository,
+		private readonly uuidService: UuidService
+	) {}
 
 	async createTask(desc: string, userId: string): Promise<void> {
 		const uuid: string = this.uuidService.UUIDgenerator();
@@ -51,5 +43,9 @@ export class TaskService {
 
 	async deleteTask(id: string): Promise<boolean> {
 		return await this.taskRepository.deleteTask(id);
+	}
+
+	async chooseRepository(db: string): Promise<void> {
+		await this.taskRepository.switchRepository(db);
 	}
 }

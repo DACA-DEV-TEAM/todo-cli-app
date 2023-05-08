@@ -6,7 +6,7 @@ import {
 import User from "../../../../../src/backend/user/domain/User";
 import JsonUserRepository from "../../../../../src/backend/user/infrastructure/json/JsonUserRepository";
 
-jest.mock("../../../../src/backend/shared/infrastructure/JsonFileUtil");
+jest.mock("../../../../../src/backend/shared/infrastructure/JsonFileUtil");
 
 const mockReadJsonFile = readJsonFile as jest.MockedFunction<typeof readJsonFile>;
 const mockWriteJsonFile = writeJsonFile as jest.MockedFunction<typeof writeJsonFile>;

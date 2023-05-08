@@ -1,7 +1,7 @@
 import { UuidService } from "../../../../src/backend/shared/application/UuidService";
 import { TaskService } from "../../../../src/backend/task/application/TaskService";
 import { Task } from "../../../../src/backend/task/domain/Task";
-import TaskRepository from "../../../../src/backend/task/domain/TaskRepository";
+import { TaskSwitchRepository } from "../../../../src/backend/task/infrastructure/TaskSwitchRepository";
 
 jest.mock("../../../../src/backend/shared/application/UuidService");
 jest.mock("../../../../src/backend/task/domain/TaskRepository");
@@ -17,7 +17,9 @@ describe("TaskService", () => {
 				deleteTask: jest.fn().mockResolvedValue(true),
 				get: jest.fn().mockResolvedValue(Task),
 				getUserTasks: jest.fn().mockResolvedValue(Task),
-			} as TaskRepository,
+				switchRepository: jest.fn(),
+				getTaskRepository: jest.fn(),
+			} as unknown as TaskSwitchRepository,
 			new UuidService()
 		);
 	});

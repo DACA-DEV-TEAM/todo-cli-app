@@ -1,34 +1,32 @@
 import { UuidService } from "../../shared/application/UuidService";
+import { IUserSwitchRepository } from "../domain/IUserSwitchRepository";
 import User from "../domain/User";
-import UserRepository from "../domain/UserRepository";
 import { BcryptService } from "./BcryptService";
-import { UserSwitchRepository } from "./UserSwitchRepository";
 
 export class UserService {
-	private userRepository: UserRepository;
 	constructor(
 		private readonly bcryptService: BcryptService,
 		private readonly uuidService: UuidService,
-		private readonly userSwitchRepository: UserSwitchRepository
-	) {
-		this.userRepository = this.userSwitchRepository.switchRepository();
-	}
+		private readonly userSwitchRepository: IUserSwitchRepository
+	) {}
 
-	chooseRepository(db: string): void {
-		this.userRepository = this.userSwitchRepository.switchRepository(db);
+	async chooseRepository(db: string): Promise<void> {
+		await this.userSwitchRepository.switchRepository(db);
 	}
 
 	async createUser(username: string, password: string): Promise<User> {
 		const uuid: string = this.uuidService.UUIDgenerator();
 		const hashedPassword: string = await this.bcryptService.encrypt(password); // El número '10' es la cantidad de rondas de salting
-		const newUser = await this.userRepository.create(new User(uuid, username, hashedPassword));
+		const newUser = await this.userSwitchRepository.create(
+			new User(uuid, username, hashedPassword)
+		);
 
 		return newUser;
 	}
 
 	async authenticate(username: string, password: string): Promise<string> {
 		try {
-			const user = await this.userRepository.getUserByUsername(username);
+			const user = await this.userSwitchRepository.getUserByUsername(username);
 
 			const isAuth = await this.bcryptService.decrypt(password, user.password);
 			if (isAuth) {

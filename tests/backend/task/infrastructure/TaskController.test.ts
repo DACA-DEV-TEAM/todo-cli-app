@@ -1,7 +1,7 @@
 import { UuidService } from "../../../../src/backend/shared/application/UuidService";
 import { TaskService } from "../../../../src/backend/task/application/TaskService";
-import TaskRepository from "../../../../src/backend/task/domain/TaskRepository";
 import { TaskController } from "../../../../src/backend/task/infrastructure/TaskController";
+import { TaskSwitchRepository } from "../../../../src/backend/task/infrastructure/TaskSwitchRepository";
 
 jest.mock("../../../../src/backend/shared/application/UuidService");
 jest.mock("../../../../src/backend/task/domain/TaskRepository");
@@ -12,7 +12,7 @@ describe("TaskController", () => {
 	let taskController: TaskController;
 
 	beforeEach(() => {
-		taskService = new TaskService({} as TaskRepository, {} as UuidService);
+		taskService = new TaskService({} as TaskSwitchRepository, {} as UuidService);
 		taskController = new TaskController(taskService);
 		taskService.updateTask = jest.fn().mockReturnValue(true);
 		taskService.deleteTask = jest.fn().mockReturnValue(true);
