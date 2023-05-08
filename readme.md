@@ -24,9 +24,9 @@ This GitHub Actions workflow automatically builds and tests the application when
 ### 💾 Using MongoDB or MySQL as a database
 This TO-DO CLI app can be used with either MongoDB or MySQL as a database. To configure the application to use the desired database, update the .env file in the root of your project with the corresponding environment variables.
 #### 🍃 MongoDB Configuration
-To use MongoDB as your database, set the DATABASE environment variable to mongodb and provide the MongoDB connection URI in the `MONGO_URI` variable.
+To use MongoDB as your database, provide the MongoDB connection URI in the `MONGO_URI` variable and choose it on cli menu.
 #### 🐬 MySQL Configuration
-To use MySQL as your database, set the DATABASE environment variable to mysql and provide the MySQL connection details in the `MYSQL_HOST`, 'MYSQL_USER', and `MYSQL_PASSWORD` variables.
+To use MySQL as your database provide the MySQL connection details in the `MYSQL_HOST`, 'MYSQL_USER', and `MYSQL_PASSWORD` variables and choose it on cli menu.
 
 ### 📥 Installation
 
