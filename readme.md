@@ -6,7 +6,7 @@
 
 This TO-DO CLI application allows users to manage tasks effectively. Users can create tasks, view tasks by status (pending, in progress, completed), update tasks, and delete tasks. The application is designed with hexagonal architecture and uses Typescript for development.
 
-### 🕹 [Demo on Replit](https://replit.com/@DannyX2/todo-api)
+### 🕹 [Demo on Replit](https://replit.com/@METAWISER/todo-cli-app?v=1)
 
 Try out the TO-DO CLI app in a live demo on Replit, an online platform to test and run code.
 
