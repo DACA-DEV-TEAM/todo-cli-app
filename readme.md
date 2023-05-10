@@ -26,7 +26,7 @@ This TO-DO CLI app can be used with either MongoDB or MySQL as a database. To co
 #### 🍃 MongoDB Configuration
 To use MongoDB as your database, provide the MongoDB connection URI in the `MONGO_URI` variable and choose it on cli menu.
 #### 🐬 MySQL Configuration
-To use MySQL as your database provide the MySQL connection details in the `MYSQL_HOST`, 'MYSQL_USER', and `MYSQL_PASSWORD` variables and choose it on cli menu.
+To use MySQL as your database provide the MySQL connection details in the `MYSQL_HOST`, `MYSQL_USER`, and `MYSQL_PASSWORD` variables and choose it on cli menu.
 
 ### 📥 Installation
 
